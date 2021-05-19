@@ -5,9 +5,9 @@
 <suite name="clockSetup" verbose="1" >
     <test name="clockSetup_test" >
         <classes>
-            <class name="automation_script.Stride80.clocksetup.clockSetupConnectivity"/>
-            <class name="automation_script.Stride80.clocksetup.clockSetupManufacturing"/>
-            <class name="automation_script.Stride80.clocksetup.clockSetupWifiConnectivity"/>
+            <class name="automation_script.Stride80.clocksetup.ClockSetupConnectivity"/>
+            <class name="automation_script.Stride80.clocksetup.ClockSetupManufacturing"/>
+            <class name="automation_script.Stride80.clocksetup.ClockSetupWifiConnectivity"/>
             <class name="automation_script.Stride80.clocksetup.CSetConnHostCellDaemons"/>
             <class name="automation_script.Stride80.clocksetup.CSetupMiscellaneous"/>
         </classes>
