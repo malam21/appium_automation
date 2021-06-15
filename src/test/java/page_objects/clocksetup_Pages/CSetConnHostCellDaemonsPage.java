@@ -4,25 +4,27 @@ import command_providers.ActOn;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+
 import java.util.concurrent.TimeUnit;
 
 
 public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
 
-
+    //--------------------------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(CSetConnHostCellDaemonsPage.class.getName());
+    //--------------------------------------------------------------------------------------------------------
+
     //Element Locator Details
     private final By HOST = By.id("com.accutime.clocksetup:id/btn_host");
     private final By HOST_URL = By.id("com.accutime.clocksetup:id/et_host_url");
     private final By HOST_USER_NAME = By.id("com.accutime.clocksetup:id/et_host_username");
     private final By HOST_PASS = By.id("com.accutime.clocksetup:id/et_host_password");
     private final By HIDE_PASS = By.id("com.accutime.clocksetup:id/cb_hide_host_password");
-    private final By CANCEL = By.id("com.accutime.clocksetup:id/btn_cancel");
     private final By DONE = By.id("com.accutime.clocksetup:id/btn_done");
-    private final By SAVE = By.id("com.accutime.clocksetup:id/btn_done");
     private final By CELL_MODEM = By.id("com.accutime.clocksetup:id/btn_cell_modem");
     private final By CELLULAR = By.id("com.accutime.clocksetup:id/cb_enable_cell_modem");
     private final By CELLULAR_NAME = By.id("com.accutime.clocksetup:id/et_cell_name");
@@ -42,7 +44,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
     private final By QUES_PROXY = By.id("com.accutime.clocksetup:id/tooltip_proxy");
     private final By QUES_PASSWORD = By.id("com.accutime.clocksetup:id/tooltip_password");
     private final By QUES_PORT = By.id("com.accutime.clocksetup:id/tooltip_port");
-    private final By RESTART_MESSAGE = By.id("android:id/message");
     private final By OK_BUTTON = By.id("android:id/button1");
     private final By DAEMONS = By.id("com.accutime.clocksetup:id/btn_daemons");
     private final By ADB = By.id("com.accutime.clocksetup:id/cb_adb");
@@ -50,23 +51,13 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
     private final By IP_ADDRESS = By.id("com.accutime.clocksetup:id/tv_ip_address");
     private final By PAGE_TITTLE = By.id("com.accutime.clocksetup:id/tv_adb_title");
     private final By TIME = By.id("com.accutime.clocksetup:id/btn_time");
-
-    private final By TIME_REGION= By.id("com.accutime.clocksetup:id/sp_time_region");
+    private final By TIME_REGION = By.id("com.accutime.clocksetup:id/sp_time_region");
     private final By SELECT_ASIA = By.xpath("//*[@text='Asia']");
-    private final By SELECT_INDIAN = By.xpath("//*[@text='Indian']");
-    private final By SELECT_MEXICO = By.xpath("//*[@text='Mexico']");
-    private final By SELECT_AMERICA = By.xpath("//*[@text='America']");
-
-    private final By TIME_ZONE= By.id("com.accutime.clocksetup:id/sp_time_zone");
-    private final By SELECT_BANGKOK = By.xpath("//*[@text='Bangkok']");
-    private final By SELECT_MALDIVES = By.xpath("//*[@text='Maldives']");
-    private final By SELECT_GENERAL = By.xpath("//*[@text='General']");
-    private final By SELECT_NewYORK = By.xpath("//*[@text='New_York']");
+    private final By TIME_ZONE = By.id("com.accutime.clocksetup:id/sp_time_zone");
     private final By NTP_ENABLE = By.id("com.accutime.clocksetup:id/cb_enable_ntp");
-
     private final By NTP_SERVER = By.id("com.accutime.clocksetup:id/et_ntp_server");
     private final By QUES_NTP_SERVER = By.id("com.accutime.clocksetup:id/tooltip_ntp_server");
-    private final By SET_SYS_DATE= By.id("com.accutime.clocksetup:id/btn_set_date");
+    private final By SET_SYS_DATE = By.id("com.accutime.clocksetup:id/btn_set_date");
     private final By SET_SYS_TIME = By.id("com.accutime.clocksetup:id/btn_set_time");
 
 
@@ -77,7 +68,7 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
     //---------------------------------------------------------------------------------------
 
 
-    public CSetConnHostCellDaemonsPage clickToHost() throws InterruptedException {
+    public CSetConnHostCellDaemonsPage clickToHost() {
         ActOn.wait(driver, HOST).waitForToBeVisible(6);
         ActOn.element(driver, HOST).click();
         LOGGER.debug("Clicked to HOST button to navigate to host page");
@@ -110,7 +101,7 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public CSetConnHostCellDaemonsPage clickToOpenHidePass() throws InterruptedException {
+    public CSetConnHostCellDaemonsPage clickToOpenHidePass() {
         ActOn.wait(driver, HIDE_PASS).waitForToBeVisible(6);
         ActOn.element(driver, HIDE_PASS).click();
         driver.hideKeyboard();
@@ -125,23 +116,25 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public CSetConnHostCellDaemonsPage clickToCellModem() throws InterruptedException {
+    public CSetConnHostCellDaemonsPage clickToCellModem() {
         ActOn.wait(driver, CELL_MODEM).waitForToBeVisible(6);
         ActOn.element(driver, CELL_MODEM).click();
-        LOGGER.debug("Clicked tO Cell Modem to navigate to cell modem page");
+        LOGGER.debug("Clicked to Cell Modem to navigate to cell modem page");
         return this;
     }
 
-    public CSetConnHostCellDaemonsPage cellModemEnable() throws InterruptedException {
+    public CSetConnHostCellDaemonsPage cellModemEnable() {
         ActOn.wait(driver, CELLULAR).waitForToBeVisible(6);
         ActOn.element(driver, CELLULAR).click();
         LOGGER.debug("Clicked to Cell Modem enable and disable button");
         return this;
     }
 
+
     public CSetConnHostCellDaemonsPage enterCellProviderName(String value) {
-        ActOn.element(driver, CELLULAR_NAME).click();
+        //ActOn.element(driver, CELLULAR_NAME).click();
         ActOn.element(driver, CELLULAR_NAME).clear();
+        ActOn.element(driver, CELLULAR_NAME).click();
         ActOn.element(driver, CELLULAR_NAME).setValue(value);
         driver.hideKeyboard();
         LOGGER.debug("Provider Name entered successfully");
@@ -273,36 +266,29 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
     }
 
 
-    public CSetConnHostCellDaemonsPage verifyRestartMessage(String expectedValue) {
-        String actualResponse = ActOn.element(driver, RESTART_MESSAGE).getTextValue();
-        Assert.assertEquals(actualResponse, expectedValue);
-        LOGGER.debug("validate restart message  : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
-        return this;
-    }
-
     public CSetConnHostCellDaemonsPage clickToOK() {
-        ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(5);
+        ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(10);
         ActOn.element(driver, OK_BUTTON).click();
         LOGGER.debug("Clicked to OK Button");
         return this;
     }
 
-    public CSetConnHostCellDaemonsPage clickToDaemons() throws InterruptedException {
+    public CSetConnHostCellDaemonsPage clickToDaemons() {
         ActOn.wait(driver, DAEMONS).waitForToBeVisible(6);
         ActOn.element(driver, DAEMONS).click();
         LOGGER.debug("Clicked to DAEMONS button to navigate to host page");
         return this;
     }
 
-    public CSetConnHostCellDaemonsPage adbEnable() throws InterruptedException {
+    public CSetConnHostCellDaemonsPage adbEnable() {
         ActOn.wait(driver, ADB).waitForToBeVisible(6);
         ActOn.element(driver, ADB).click();
         LOGGER.debug("Clicked to ADB enable and disable button");
         return this;
     }
 
-    public CSetConnHostCellDaemonsPage clickConnectToADB() throws InterruptedException {
-        ActOn.wait(driver, CONNECT_ADB).waitForToBeVisible(6);
+    public CSetConnHostCellDaemonsPage clickConnectToADB() {
+        ActOn.wait(driver, CONNECT_ADB).waitForToBeVisible(2);
         ActOn.element(driver, CONNECT_ADB).click();
         LOGGER.debug("Clicked to CONNECT_ADB page open");
         return this;
@@ -310,6 +296,7 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
 
 
     public CSetConnHostCellDaemonsPage verifyADBConnectPageTittle(String expectedValue) {
+        ActOn.wait(driver, PAGE_TITTLE).waitForToBeVisible(2);
         String actualResponse = ActOn.element(driver, PAGE_TITTLE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
         LOGGER.debug("validate page tittle  : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
@@ -325,17 +312,16 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
             LOGGER.debug("Verified contains partially match : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
             LOGGER.info("Verified contains did not match as expected because script is not updated with current ip address");
             TimeUnit.SECONDS.sleep(8);
-            clickToDone();
         } else {
             LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
             LOGGER.info("Verified contains did not match at all and need tester attention");
-            clickToDone();
         }
+        clickToDone();
         return this;
     }
 
 
-    public CSetConnHostCellDaemonsPage clickToTime() throws InterruptedException {
+    public CSetConnHostCellDaemonsPage clickToTime() {
         ActOn.wait(driver, TIME).waitForToBeVisible(6);
         ActOn.element(driver, TIME).click();
         LOGGER.debug("Navigated to Time page");
@@ -424,8 +410,9 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public CSetConnHostCellDaemonsPage enterNTPServerInformation(String value) {
-        ActOn.wait(driver, NTP_SERVER).waitForToBeVisible(10);
+    public CSetConnHostCellDaemonsPage enterNTPServerInformation(String value) throws InterruptedException {
+        //ActOn.wait(driver, NTP_SERVER).waitForToBeVisible(6);
+        TimeUnit.SECONDS.sleep(5);
         ActOn.element(driver, NTP_SERVER).click();
         ActOn.element(driver, NTP_SERVER).clear();
         ActOn.element(driver, NTP_SERVER).setValue(value);
@@ -449,6 +436,18 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
+    public CSetConnHostCellDaemonsPage checkAndEnableNTP() {
+        WebElement checkbox = driver.findElement(By.id("com.accutime.clocksetup:id/cb_enable_ntp"));
+        if ((checkbox.getAttribute("checked").equals("true"))) {
+            LOGGER.info("NTP enabled, checkbox already selected");
+        } else {
+            LOGGER.info("NTP not enabled checkbox now selected");
+            ActOn.element(driver, NTP_ENABLE).click();
+        }
+        return this;
+    }
+
+
     public CSetConnHostCellDaemonsPage clickToSetSysTime() {
         ActOn.wait(driver, SET_SYS_TIME).waitForToBeVisible(6);
         ActOn.element(driver, SET_SYS_TIME).click();
@@ -466,14 +465,19 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
 }
 
 
-
 //---------------------------------------------------------------------------------------------
 
 
-
-
-
-
+//private final By CANCEL = By.id("com.accutime.clocksetup:id/btn_cancel");
+//private final By SAVE = By.id("com.accutime.clocksetup:id/btn_done");
+//private final By SELECT_INDIAN = By.xpath("//*[@text='Indian']");
+//private final By SELECT_MEXICO = By.xpath("//*[@text='Mexico']");
+//private final By SELECT_AMERICA = By.xpath("//*[@text='America']");
+//private final By SELECT_BANGKOK = By.xpath("//*[@text='Bangkok']");
+//private final By SELECT_MALDIVES = By.xpath("//*[@text='Maldives']");
+//private final By SELECT_GENERAL = By.xpath("//*[@text='General']");
+//private final By SELECT_NewYORK = By.xpath("//*[@text='New_York']");
+//private final By RESTART_MESSAGE = By.id("android:id/message");
 
 //    private static int getRandomNumberInBetween(int lowerBound, int upperBound){
 //        Random r = new Random();
@@ -503,21 +507,12 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
 //        return this;
 //    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//    public CSetConnHostCellDaemonsPage verifyRestartMessage(String expectedValue) {
+//        String actualResponse = ActOn.element(driver, RESTART_MESSAGE).getTextValue();
+//        Assert.assertEquals(actualResponse, expectedValue);
+//        LOGGER.debug("validate restart message  : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+//        return this;
+//    }
 
 
 //    public CSetConnHostCellDaemonsPage enterSSID(String value) throws InterruptedException {

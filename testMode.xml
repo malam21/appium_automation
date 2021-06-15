@@ -5,8 +5,9 @@
 <suite name="testMode" verbose="1" >
     <test name="testMode_test" >
         <classes>
-            <class name="automation_script.Stride80.testmode.ValidateSpeakerLightBarPowerTest"/>
             <class name="automation_script.Stride80.testmode.ValidateKeypadDisplayTouch"/>
+            <class name="automation_script.Stride80.testmode.ValidateSpeakerLightBarPowerTest"/>
+            <class name="automation_script.Stride80.testmode.ValidateDiDoCamera"/>
         </classes>
     </test>
 </suite>

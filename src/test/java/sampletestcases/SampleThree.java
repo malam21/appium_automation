@@ -1,42 +1,45 @@
 package sampletestcases;
 
 
-import command_providers.ActOn;
-import command_providers.ElementActions;
-import command_providers.WaitFor;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class SampleThree {
 
 
-    AndroidDriver<MobileElement> driver;
+    static AndroidDriver<MobileElement> driver;
 
     @BeforeTest
-    public void setupthree() {
+    public void setupThree() {
 
         try {
             DesiredCapabilities caps = new DesiredCapabilities();
-            caps.setCapability("noReset", "true");
-            caps.setCapability("fullReset", "false");
+            //caps.setCapability("noReset", "true");
+            //caps.setCapability("fullReset", "false");
             caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "ANDROID");
             caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.1.0");
+            //caps.setCapability(MobileCapabilityType.DEVICE_NAME, "hcm");
             //caps.setCapability(MobileCapabilityType.DEVICE_NAME, "c2c3a0db");
-            caps.setCapability(MobileCapabilityType.UDID, "192.168.1.220:3121");
+            caps.setCapability(MobileCapabilityType.UDID, "192.168.1.237:3121");
             caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Uiautomator2");
-
 
 
             //-Build Location
@@ -47,11 +50,15 @@ public class SampleThree {
 
 
             //Correct sequence to open the installed app in the device without build
-            //caps.setCapability("appPackage", "com.accutime.testmode");
-            //caps.setCapability("appActivity", "com.accutime.testmode.MainActivity");
-            caps.setCapability("appWaitDuration,30000",true);
-            caps.setCapability("appPackage", "com.accutime.clocksetup");
-            caps.setCapability("appActivity", "com.accutime.clocksetup.activities.MainActivity");
+            //driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+            caps.setCapability("appWaitDuration,30000", true);
+            caps.setCapability("appPackage", "com.accutime.testmode");
+            caps.setCapability("appActivity", "com.accutime.testmode.MainActivity");
+
+
+            //caps.setCapability("appWaitDuration,30000",true);
+            //caps.setCapability("appPackage", "com.accutime.clocksetup");
+            //caps.setCapability("appActivity", "com.accutime.clocksetup.activities.MainActivity");
 
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
 
@@ -70,7 +77,59 @@ public class SampleThree {
 
 
     @Test
-    public void sampleTest2() throws InterruptedException, ParseException {
+    public void sampleTest2() throws InterruptedException, ParseException, IOException {
+
+
+        driver.findElement(By.id("com.accutime.testmode:id/btn_dido_fragment")).click();
+
+
+
+
+        TimeUnit.SECONDS.sleep(8);
+        WebElement checkbox = driver.findElement(By.id("com.accutime.testmode:id/cb_relay_1"));
+        //if  (checkbox.getAttribute("checked") == String.valueOf(false)){
+        //if (checkbox.isSelected() == true) {
+            if(checkbox.getAttribute("checked") == ("true")){
+            //ActOn.element(driver, PASS_BUTTON).click();
+            //driver.findElement(By.id("com.accutime.testmode:id/cb_relay_1")).click();
+            System.out.println(true);
+        } else
+            System.out.println(false);
+            driver.findElement(By.id("com.accutime.testmode:id/cb_relay_1")).click();
+            driver.findElement(By.id("com.accutime.testmode:id/btn_dido_command_out")).click();
+            takeScreenShot(driver, "c://test.png");
+            //randomNumber();
+           System.out.println(""+randomNumber());
+           driver.findElement(By.id("com.accutime.testmode:id/cb_relay_1")).setValue(""+randomNumber());
+    }
+
+
+
+
+    public static void takeScreenShot(AndroidDriver<MobileElement> driver, String s) throws IOException {
+        Date currentdate = new Date();
+        String screenshotfilename = currentdate.toString().replace(" ", "-").replace(":", "-");
+        System.out.println(screenshotfilename);
+        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshotFile, new File(".//screenshot//" + screenshotfilename + ".png"));
+
+        //Move image file to new destination
+//        File DestFile=new File(fileWithPath);
+        //Copy file at destination
+//        FileUtils.copyFile(SrcFile, DestFile);
+    }
+
+
+    public static int randomNumber()
+    {
+        Random rand = new Random();
+        int minRange = 1000, maxRange= 5000;
+        int value = rand.nextInt(maxRange - minRange) + minRange;
+        System.out.println(value);
+        return value;
+    }
+
+
 
 
 
@@ -98,7 +157,7 @@ public class SampleThree {
 //        }
 
 
-//        if driver.findElement(By.id("com.accutime.atsmgmtdemo:id/cb_dhcp")).getAttribute('checked')==true;
+//        if ActOn.element(driver, PASS_BUTTON).getAttribute("checked")= true;
 //       // checkbox driver.findElement(By.id("com.accutime.atsmgmtdemo:id/cb_dhcp"));
 //
 //        //if(checkbox.getAttribute("true"));{
@@ -108,47 +167,45 @@ public class SampleThree {
 //            ActOn.element(driver, PASS_BUTTON).click();
 //
 //        }
-//
-//    }
 
-//    // WebElement checkbox = driver.findElement(By.id("com.accutime.atsmgmtdemo:id/cb_dhcp"));
+
 //
-//    //(checkbox.getAttribute("true"));{
-//    //driver.findElement(By.id("com.accutime.atsmgmtdemo:id/cb_dhcp")).GetAttribute("checked").Equals("true"))
-//
+    //(checkbox.getAttribute("checked"));{
+    //driver.findElement(By.id("com.accutime.atsmgmtdemo:id/cb_dhcp")).GetAttribute("checked").Equals("true"))
+
 //    WebElement checkbox = driver.findElement(By.id("com.accutime.atsmgmtdemo:id/cb_dhcp"));
-//        if (checkbox.GetAttribute("checked") != null && checkbox.GetAttribute("checked").Equals("true")){
+//    if  (checkbox.getAttribute("checked") == String.valueOf(true));{
 //        //if(checkbox.getAttribute("true"));{
 //        ActOn.element(driver, PASS_BUTTON).click();
 //
-//    } else if{
+//    } else if
 //        ActOn.element(driver, PASS_BUTTON).click();
 //
 //    }
+
+
+
+
+
+
+
+//        String SystemTime = "15:41:14";
+//       String RTCTime = "15:41:15";
 //
-//}
-
-
-
-
-
-        String SystemTime = "15:41:14";
-       String RTCTime = "15:41:15";
-
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-        Date timeOne = sdf.parse(SystemTime);
-        Date timeTwo = sdf.parse(RTCTime);
-
-        Long dif = timeTwo.getTime()-timeOne.getTime();
-        //System.out.println(dif/1000);
-        System.out.println(dif);
+//        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+//        Date timeOne = sdf.parse(SystemTime);
+//        Date timeTwo = sdf.parse(RTCTime);
+//
+//        Long dif = timeTwo.getTime()-timeOne.getTime();
+//        //System.out.println(dif/1000);
+//        System.out.println(dif);
 
 
 
 
 
 
-}
+
 
 
 

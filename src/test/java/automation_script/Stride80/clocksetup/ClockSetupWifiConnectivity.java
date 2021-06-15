@@ -9,7 +9,7 @@ public class ClockSetupWifiConnectivity extends ClockSetup_BaseClass {
 
     @Test(dataProvider = "clockSetupWifiSettings", dataProviderClass = DataProviderClockSetup.class)
     public void clockSetupWifiConnectivity(String ssid, String wifiPass, String wifiConnMess, String fixedIP, String subnetMask, String dnsOne,
-                                           String dnsTwo, String dnsThree, String gatWay) throws InterruptedException {
+                                           String gatWay) throws InterruptedException {
 
         new NavigationPageClockSetup(driver)
 
@@ -18,6 +18,7 @@ public class ClockSetupWifiConnectivity extends ClockSetup_BaseClass {
                 .clickToLogin()
                 .navigateToWifiConnectivityPage()
                 .clickToWifi()
+                .clickToWifiEnable()
                 .enterSSID(ssid)
                 .enterWIFIPassword(wifiPass)
                 .clickToHidePass()
@@ -40,6 +41,7 @@ public class ClockSetupWifiConnectivity extends ClockSetup_BaseClass {
                 .clickToOK()
                 .clickToWifi()
                 .clickToDHCPCheckBox()
+                .clickToWifiEnable()
                 .clickToDone()
                 .clickToOK();
 
@@ -47,14 +49,7 @@ public class ClockSetupWifiConnectivity extends ClockSetup_BaseClass {
 }
 
 
-
-
-
-
-
-
-
-
+//------------------------------------------------------
 //.verifyRestartMessage(restartMess)
 //.enterDNSTwo(dnsTwo)
 //.enterDNSThree(dnsThree)

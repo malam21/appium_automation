@@ -1,7 +1,6 @@
 package automation_script.Stride80.clocksetup;
 
 import data_provider.clocksetup.DataProviderClockSetup;
-import listeners.BaseClass;
 import org.testng.annotations.Test;
 import page_objects.clocksetup_Pages.NavigationPageClockSetup;
 import utilities.ReadConfigFiles;
@@ -29,7 +28,6 @@ public class CSetupMiscellaneous extends ClockSetup_BaseClass {
                 .clickToOKButton()
                 .clickToDone()
                 .clickToDone()
-                //.clickToDone()
                 .clickToOKButton()
                 .navigateToSetupPage()
                 .enterVarPassword(ReadConfigFiles.getPropertyValue("Password"))
@@ -49,7 +47,6 @@ public class CSetupMiscellaneous extends ClockSetup_BaseClass {
                 .clickToDone()
                 .clickToDone()
                 .clickToDone();
-
 
     }
 }

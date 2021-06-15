@@ -49,7 +49,7 @@ public class ClockSetup_BaseClass {
     public void closeBrowser() {
         // driver.manage().deleteAllCookies();
         //ActOn.browser(driver).closeBrowser();
-        //driver.quit();
+        driver.quit();
         LOGGER.info(endTestCase);
     }
 }

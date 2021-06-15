@@ -1,26 +1,27 @@
 package command_providers;
 
 
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.Select;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import page_objects.ATSMgmt_DemoPages.GetSetUpParameterPage;
 
 
 public class ElementActions {
 
     private By locator;
-    private WebDriver driver;
-    //private static final Logger LOGGER = LogManager.getLogger(ElementActions.class);
+    private static WebDriver driver;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ElementActions.class.getName());
 
 
@@ -62,20 +63,20 @@ public class ElementActions {
 
     public ElementActions displayed() {
         getElement().isDisplayed();
-        if (getElement().isDisplayed()==true){
-            LOGGER.debug(getElement().getText()+" Element displayed");
-        } else{
-            LOGGER.debug(getElement().getText()+" Element Not displayed");
+        if (getElement().isDisplayed() == true) {
+            LOGGER.debug(getElement().getText() + " Element displayed");
+        } else {
+            LOGGER.debug(getElement().getText() + " Element Not displayed");
         }
         return this;
     }
 
     public ElementActions isEnabled() {
         getElement().isEnabled();
-        if (getElement().isEnabled()==true){
-            LOGGER.debug(getElement().getText()+" Element is Enabled");
-        } else{
-            LOGGER.debug(getElement().getText()+" Element Not Enabled");
+        if (getElement().isEnabled() == true) {
+            LOGGER.debug(getElement().getText() + " Element is Enabled");
+        } else {
+            LOGGER.debug(getElement().getText() + " Element Not Enabled");
         }
         return this;
     }
@@ -83,22 +84,22 @@ public class ElementActions {
 
     public ElementActions isDisabled() {
         getElement().isEnabled();
-        if (getElement().isEnabled()==false){
-            LOGGER.debug(getElement().getText()+" Element is Disabled");
-        } else{
-            LOGGER.debug(getElement().getText()+" Element is Enabled");
+        if (getElement().isEnabled() == false) {
+            LOGGER.debug(getElement().getText() + " Element is Disabled");
+        } else {
+            LOGGER.debug(getElement().getText() + " Element is Enabled");
         }
         return this;
     }
 
 
-
     public ElementActions isChecked() {
         getElement().isSelected();
-        if (getElement().isSelected()==true){
-            LOGGER.debug(getElement().getText()+" Element is Selected as checked");
-        } else{
-            LOGGER.debug(getElement().getText()+" Element is not selected as checked");
+        if (getElement().isSelected() == true) {
+
+            LOGGER.debug(getElement().getText() + " Element is Selected as checked");
+        } else {
+            LOGGER.debug(getElement().getText() + " Element is not selected as checked");
         }
         return this;
     }
@@ -107,7 +108,7 @@ public class ElementActions {
     public ElementActions scrollBy() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //This will scroll the page till the element is found
-        js.executeScript("arguments[0].scrollIntoView();",getElement());
+        js.executeScript("arguments[0].scrollIntoView();", getElement());
         return this;
     }
 
@@ -124,8 +125,22 @@ public class ElementActions {
     }
 
     public String getTextValue() {
+
         return getElement().getText();
     }
 
+    public static void takeScreenShot() throws IOException {
+        Date currentdate = new Date();
+        String screenshotfilename = currentdate.toString().replace(" ", "-").replace(":", "-");
+        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshotFile, new File(".//screenshot//" + screenshotfilename + ".png"));
+        LOGGER.info("Screenshot " + screenshotfilename + " has been taken for validation");
+        //command_providers.ElementActions.takeScreenShot();
+    }
 
 }
+
+
+//private static final Logger LOGGER = LogManager.getLogger(ElementActions.class);
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;

@@ -14,9 +14,12 @@ public class NavigationPageTestMode {
 
     public AndroidDriver<MobileElement> driver;
 
+    //----------------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(NavigationPageTestMode.class.getName());
+    //----------------------------------------------------------------------------------------------
 
-    //Element Locator
+
+    //Element Locator Details
     private final By KEYPAD_TEST = By.id("com.accutime.testmode:id/btn_keypad_fragment");
     private final By DISPLAY_TEST = By.id("com.accutime.testmode:id/btn_display_fragment");
     private final By TOUCH_TEST = By.id("com.accutime.testmode:id/btn_touch_fragment");
@@ -27,12 +30,17 @@ public class NavigationPageTestMode {
     private final By BIOMETRIC_TEST = By.id("com.accutime.testmode:id/btn_biometric_fragment");
     private final By RTC_TEST = By.id("com.accutime.testmode:id/btn_rtc_fragment");
     private final By PRESENCE_SENSOR_TEST = By.id("com.accutime.testmode:id/btn_presence_fragment");
-    private final By CONNECTIVITY = By.id("com.accutime.testmode:id/btn_connectivity");
     private final By ABOUT_CLOCK = By.id("com.accutime.testmode:id/btn_about_fragment");
+    private final By CAMERA_TEST = By.id("com.accutime.testmode:id/btn_camera_test");
 
 
+    //*
+    //private final By POWER_TEST = By.id("com.accutime.testmode:id/btn_dido_fragment");
+    //private final By DIDO = By.id("com.accutime.testmode:id/btn_dido_fragment");
+    //private final By CONNECTIVITY = By.id("com.accutime.testmode:id/btn_connectivity");
+    //*
 
-    //private final By POWER_TEST = By.id("com.accutime.testmode:id/btn_about_fragment");
+    //-------------------------------------------------------------------------------------------
     public NavigationPageTestMode(AndroidDriver driver) {
         this.driver = driver;
     }
@@ -73,7 +81,6 @@ public class NavigationPageTestMode {
     }
 
 
-
     //Navigate to LightBar test page
     public SpeakerLightBarPowerTestPage navigateToLightBarPage() {
         ActOn.element(driver, LIGHT_TEST).click();
@@ -87,40 +94,41 @@ public class NavigationPageTestMode {
         LOGGER.info("User navigated to Power Management test page.");
         return new SpeakerLightBarPowerTestPage(driver);
     }
-
-
-
-
-
+    //Navigate to Biometric test page
     public SpeakerLightBarPowerTestPage navigateToBiometricPage() {
         ActOn.element(driver, BIOMETRIC_TEST).click();
         LOGGER.info("User navigated to Biometric test page.");
         return new SpeakerLightBarPowerTestPage(driver);
     }
 
+    //Navigate to RTC test page
     public SpeakerLightBarPowerTestPage navigateToRTCTestPage() {
         ActOn.element(driver, RTC_TEST).click();
         LOGGER.info("User navigated to RTC test page.");
         return new SpeakerLightBarPowerTestPage(driver);
     }
 
+    //Navigate to Presence Sensor Test Page
     public SpeakerLightBarPowerTestPage navigateToPresenceSensorTestPage() {
         ActOn.element(driver, PRESENCE_SENSOR_TEST).click();
         LOGGER.info("User navigated to Presence Sensor test page.");
         return new SpeakerLightBarPowerTestPage(driver);
     }
 
-    public SpeakerLightBarPowerTestPage navigateToConnectivityPage() {
-        ActOn.element(driver, CONNECTIVITY).click();
-        LOGGER.info("User navigated to connectivity page.");
-        //driver.runAppInBackground(Duration.ofMillis(15000));
-        return new SpeakerLightBarPowerTestPage(driver);
-    }
-
+    //Navigate to About Clock Page
     public SpeakerLightBarPowerTestPage navigateToAboutClockPage() {
         ActOn.element(driver, ABOUT_CLOCK).click();
         LOGGER.info("User navigated to about clock page.");
         return new SpeakerLightBarPowerTestPage(driver);
+    }
+
+    //Navigate to Camera Test Page
+    public DiDoCameraTestPage navigateToCameraTestPage() {
+        ActOn.element(driver, CAMERA_TEST).click();
+        LOGGER.info("User navigated to Camera Test Page");
+        LOGGER.debug("User navigating to Camera page");
+        return new DiDoCameraTestPage(driver);
+
     }
 
 }
@@ -131,8 +139,13 @@ public class NavigationPageTestMode {
 
 
 
-
-
+//-------------------------------------------------------------------------------------
+//public SpeakerLightBarPowerTestPage navigateToConnectivityPage() {
+//    ActOn.element(driver, CONNECTIVITY).click();
+//    LOGGER.info("User navigated to connectivity page.");
+//    //driver.runAppInBackground(Duration.ofMillis(15000));
+//    return new SpeakerLightBarPowerTestPage(driver);
+//}
 
 
 

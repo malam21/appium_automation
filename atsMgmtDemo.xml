@@ -5,10 +5,11 @@
 <suite name="atsmgmt_demo" verbose="1" >
     <test name="atsmgmt_demo_test" >
         <classes>
+            <class name="automation_script.Stride80.atsmgmt_demo.GetSetUpParameters"/>
             <class name="automation_script.Stride80.atsmgmt_demo.ValidateResetPasswords"/>
             <class name="automation_script.Stride80.atsmgmt_demo.ValidateSetupParameter"/>
             <class name="automation_script.Stride80.atsmgmt_demo.ValidateSystemTime"/>
-            <class name="automation_script.Stride80.atsmgmt_demo.GetSetUpParameters"/>
+            <class name="automation_script.Stride80.atsmgmt_demo.ValidatePullSetupParameters"/>
         </classes>
     </test>
 </suite>

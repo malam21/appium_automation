@@ -8,7 +8,7 @@ import utilities.ReadConfigFiles;
 public class ClockSetupTerminal extends ClockSetup_BaseClass {
 
     @Test(dataProvider = "clockSetupTerminalSettings", dataProviderClass = DataProviderClockSetup.class)
-    public void clockSetupMiscellaneous(String terminalName, String fileSize, String timeInterval, String triggerDis, String timeOut ) throws InterruptedException {
+    public void clockSetupMiscellaneous(String terminalName, String fileSize, String timeInterval, String triggerDis, String timeOut) throws InterruptedException {
 
         new NavigationPageClockSetup(driver)
 

@@ -7,13 +7,17 @@ import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import utilities.ReadConfigFiles;
 
 import java.util.concurrent.TimeUnit;
 
 
 public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
 
+
+    //---------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(SpeakerLightBarPowerTestPage.class.getName());
+    //---------------------------------------------------------------------------------------
 
 
     //Element Locator Details
@@ -44,16 +48,21 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     private final By RTC_TIME = By.id("com.accutime.testmode:id/tv_current_rtc_time");
     private final By OUT_OF_RANGE = By.id("com.accutime.testmode:id/tv_presence_message");
     private final By NEAREST_OBJECT = By.id("com.accutime.testmode:id/tv_presence_message");
-    private final By TROUBLESHOOTING = By.id("com.accutime.testmode:id/btn_troubleshooting");
     private final By SERIAL_NUMBER = By.id("com.accutime.testmode:id/serial_number");
     private final By KEYPAD = By.id("com.accutime.testmode:id/keyboard");
     private final By FAIL_TEST = By.id("com.accutime.testmode:id/btn_fail_test");
     private final By BIO_SENSOR = By.id("com.accutime.testmode:id/bio");
     private final By HID_PROX_CARD = By.id("com.accutime.testmode:id/hid_prox");
     private final By OS_VERSION = By.id("com.accutime.testmode:id/os_ver");
+    private final By OK_BUTTON = By.id("android:id/button1");
 
 
+    //*
     //private final By TROUBLESHOOTING = By.id("com.accutime.testmode.TestActivities:id/btn_troubleshooting");
+    //private final By TROUBLESHOOTING = By.id("com.accutime.testmode:id/btn_troubleshooting");
+    //*
+
+
     //---------------------------------------------------------------------------------------
     public SpeakerLightBarPowerTestPage(AndroidDriver<MobileElement> driver) {
         super(driver);
@@ -67,7 +76,6 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         LOGGER.debug("Clicked on Play to test speaker");
         return this;
     }
-
 
     public SpeakerLightBarPowerTestPage clickToPassSpeakerTest() {
         ActOn.element(driver, PASS_TEST).click();
@@ -118,6 +126,13 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         return this;
     }
 
+    public SpeakerLightBarPowerTestPage clickToOKButton() {
+        ActOn.element(driver, OK_BUTTON).click();
+        LOGGER.debug("Clicked To OK Button");
+        return this;
+    }
+
+
     public SpeakerLightBarPowerTestPage clickToSelectWhite() {
         ActOn.element(driver, SELECT_WHITE).click();
         LOGGER.debug("Clicked To Select color White");
@@ -125,36 +140,66 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     }
 
     public SpeakerLightBarPowerTestPage selectLightBarBrightness() {
-        ActOn.wait(driver, BRIGHTNESS).waitForToBeVisible(5);
+        //ActOn.wait(driver, BRIGHTNESS).waitForToBeVisible(10);
         ActOn.element(driver, BRIGHTNESS).click();
-        LOGGER.debug("Clicked To Select color White");
+        LOGGER.debug("Clicked To Select light Brightness");
         return this;
     }
 
     public SpeakerLightBarPowerTestPage selectBrightnessSixty() {
-        ActOn.element(driver, BRIGHTNESS_SIXTY).click();
-        LOGGER.debug("Clicked To Select Brightness Sixty");
+        if (driver.findElement(By.xpath("//*[@text='60']")).isDisplayed()) {
+            ActOn.element(driver, BRIGHTNESS_SIXTY).click();
+            LOGGER.debug("Clicked To Select Brightness Sixty");
+        } else {
+            ActOn.element(driver, OK_BUTTON).click();
+            LOGGER.info("Clicked to OK button");
+            ActOn.element(driver, BRIGHTNESS_SIXTY).click();
+            LOGGER.debug("Clicked To Select Brightness Sixty");
+        }
         return this;
     }
+
 
     public SpeakerLightBarPowerTestPage selectBrightnessHundred() {
-        ActOn.element(driver, BRIGHTNESS_HUNDRED).click();
-        LOGGER.debug("Clicked To Select Brightness Hundred");
+        if (driver.findElement(By.xpath("//*[@text='100']")).isDisplayed()) {
+            ActOn.element(driver, BRIGHTNESS_HUNDRED).click();
+            LOGGER.debug("Clicked To Select Brightness Hundred");
+        } else {
+            ActOn.element(driver, OK_BUTTON).click();
+            ActOn.element(driver, BRIGHTNESS_HUNDRED).click();
+            LOGGER.info("Clicked to OK displayed ");
+        }
         return this;
     }
+
 
     public SpeakerLightBarPowerTestPage selectBrightnessSeventy() {
-        ActOn.element(driver, BRIGHTNESS_SEVENTY).click();
-        LOGGER.debug("Clicked To Select Brightness Seventy");
+        if (driver.findElement(By.xpath("//*[@text='70']")).isDisplayed()) {
+            ActOn.element(driver, BRIGHTNESS_SEVENTY).click();
+            LOGGER.debug("Clicked To Select Brightness Seventy");
+        } else {
+            ActOn.element(driver, OK_BUTTON).click();
+            LOGGER.info("Clicked to OK button");
+            ActOn.element(driver, BRIGHTNESS_SEVENTY).click();
+            LOGGER.info("Clicked To Select Brightness Seventy");
+        }
         return this;
     }
 
+
     public SpeakerLightBarPowerTestPage selectBrightnessNinety() {
-        ActOn.wait(driver, BRIGHTNESS_NINETY).waitForToBeVisible(5);
-        ActOn.element(driver, BRIGHTNESS_NINETY).click();
-        LOGGER.debug("Clicked To Select Brightness Ninety");
+        if (driver.findElement(By.xpath("//*[@text='90']")).isDisplayed()) {
+            ActOn.element(driver, BRIGHTNESS_NINETY).click();
+            LOGGER.debug("Clicked To Select Brightness Ninety");
+        } else {
+            ActOn.element(driver, OK_BUTTON).click();
+            LOGGER.info("Clicked to OK button");
+            ActOn.element(driver, BRIGHTNESS_NINETY).click();
+            LOGGER.info("Clicked To Select Brightness Ninety");
+        }
         return this;
     }
+
 
     public SpeakerLightBarPowerTestPage selectFlash() throws InterruptedException {
         ActOn.element(driver, SELECT_FLASH).click();
@@ -171,11 +216,7 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     }
 
     public SpeakerLightBarPowerTestPage selectPassTest() throws InterruptedException {
-
-        //ActOn.wait(driver, PASS_TEST).waitForToBeVisible(5);
-        //TimeUnit.SECONDS.sleep(5);
         ActOn.element(driver, PASS_TEST).click();
-        // TimeUnit.SECONDS.sleep(5);
         LOGGER.debug("Clicked To Select test Pass.");
         LOGGER.info("User navigating to main page.");
         TimeUnit.SECONDS.sleep(3);
@@ -190,14 +231,16 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     }
 
     public SpeakerLightBarPowerTestPage verifyFingerButtonStatus() {
+        ActOn.wait(driver, VERIFY_FINGER_BUTTON).waitForToBeVisible(3);
         ActOn.element(driver, VERIFY_FINGER_BUTTON).isEnabled();
         LOGGER.debug("Verified Finger Print Button is Disabled");
         return this;
     }
 
     public SpeakerLightBarPowerTestPage selectCaptureFingerButton() {
+        ActOn.wait(driver, CAPTURE_FINGER_BUTTON).waitForToBeVisible(5);
         ActOn.element(driver, CAPTURE_FINGER_BUTTON).click();
-        LOGGER.debug("Clicked To select Capture Finger Button");
+        LOGGER.debug("Clicked To select Capture Finger print Button");
         return this;
     }
 
@@ -206,12 +249,10 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         String actualResponse = ActOn.element(driver, FINGER_PRINT_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
         LOGGER.debug("Verified Finger Print Message displayed in the screen : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
-        LOGGER.info("Validating failure print failure message don't put your finger. ");
+        LOGGER.info("Validating failure print message So don't put your finger. ");
         TimeUnit.SECONDS.sleep(5);
-
         return this;
     }
-
 
     public SpeakerLightBarPowerTestPage verifyCaptureFailed(String expectedValue) throws InterruptedException {
         ActOn.wait(driver, CAPTURE_FINGER_BUTTON).waitForToBeVisible(5);
@@ -225,37 +266,50 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     public SpeakerLightBarPowerTestPage scanFingerForFirstTime() throws InterruptedException {
         ActOn.element(driver, CAPTURE_FINGER_BUTTON).click();
         LOGGER.debug("Clicked To Select Capture Finger print Button");
-        //TimeUnit.SECONDS.sleep(3);
-        //((JavascriptExecutor)driver).executeScript("alert('put your finger')");
-        //driver.switchTo().alert().accept();
-        LOGGER.info("Validating Finger print for first(***PUT FINGER FOR SCAN****) successful scan please put your finger.");
+        LOGGER.info("%%%%%%% PUT YOUR FINGER NOW. %%%%%%% ");
+        LOGGER.info("%%%%%%% PUT YOUR FINGER NOW. %%%%%%% ");
+        LOGGER.info("VALIDATING SUCCESSFUL FINGER PRINT FOR FIRST PRINT TEST.");
         TimeUnit.SECONDS.sleep(7);
         return this;
 
     }
 
-
     public SpeakerLightBarPowerTestPage verifyFirstCapturePassed(String expectedValue) throws InterruptedException {
+        LOGGER.info("%%%%%%% TESTER HAS TO BE PRESENT FRONT POF THE LAPTOP. %%%%%%% ");
         ActOn.wait(driver, CAPTURE_PASS_BUTTON).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, CAPTURE_PASS_BUTTON).getTextValue();
-        Assert.assertEquals(actualResponse, expectedValue);
-        LOGGER.debug("Verified First Capture Passed : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
-        TimeUnit.SECONDS.sleep(2);
+        if (actualResponse.equals(expectedValue)) {
+            LOGGER.debug("Verified CAPTURE_PASS_BUTTON : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+            TimeUnit.SECONDS.sleep(2);
+            scanWrongFinger();
+            TimeUnit.SECONDS.sleep(2);
+            verifySecondScanFailed(ReadConfigFiles.getPropertyValue("failFinger"));
+            TimeUnit.SECONDS.sleep(2);
+            scanSameFingerForSecondTime();
+            TimeUnit.SECONDS.sleep(2);
+            verifyScannedFingerMessage(ReadConfigFiles.getPropertyValue("scaFingMessage"));
+            TimeUnit.SECONDS.sleep(2);
+        } else {
+
+            LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
+            ActOn.element(driver, FAIL_TEST).click();
+            LOGGER.info("%%%%%%%  TEST HAS BEEN FAILED DUE TO TESTER PRESENCE  %%%%%%%");
+        }
         return this;
     }
-
-    //-------------------------
 
 
     public SpeakerLightBarPowerTestPage scanWrongFinger() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(2);
+        LOGGER.info("%%%%%%% BE READY TO PUT YOUR WRONG FINGER NOW. %%%%%%% ");
+        TimeUnit.SECONDS.sleep(3);
         ActOn.element(driver, VERIFY_FINGER_BUTTON).click();
         LOGGER.debug("Verify scanned Fingerprint button Clicked");
-        LOGGER.info("Please put your WRONG FINGER to(***PUT WRONG FINGER****) fail the second capture to verify fail functionality");
-        //TimeUnit.SECONDS.sleep(5);
+        LOGGER.info("%%%%%%% PUT YOUR WRONG FINGER NOW. %%%%%%% ");
+        LOGGER.info("%%%%%%% PUT YOUR WRONG FINGER NOW. %%%%%%% VALIDATING WRONG FINGER PRINT FOR SECOND SCAN TEST.");
+        TimeUnit.SECONDS.sleep(5);
         return this;
     }
-
 
     public SpeakerLightBarPowerTestPage verifySecondScanFailed(String expectedValue) throws InterruptedException {
         ActOn.wait(driver, CAPTURE_FAILED_VERIFY).waitForToBeVisible(5);
@@ -266,19 +320,21 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         return this;
     }
 
-
     public SpeakerLightBarPowerTestPage scanSameFingerForSecondTime() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(3);
+        LOGGER.info("%%%%%%% BE READY TO PUT YOUR FIRST FINGER AGAIN NOW FOR SECOND TIME THIRD SCAN. %%%%%%% ");
+        TimeUnit.SECONDS.sleep(2);
         ActOn.element(driver, VERIFY_FINGER_BUTTON).click();
         LOGGER.debug("Verify scanned Fingerprint button Clicked");
-        LOGGER.info("Please put your same scanned(***PUT CORRECT FINGER AGAIN****) finger for pass the test");
+        TimeUnit.SECONDS.sleep(4);
+        LOGGER.info("%%%%%%% PUT YOUR FIRST FINGER NOW FOR SECOND TIME THIRD SCAN. %%%%%%% ");
+        LOGGER.info("%%%%%%% PUT YOUR FIRST FINGER NOW FOR SECOND TIME THIRD SCAN. %%%%%%% ");
         //TimeUnit.SECONDS.sleep(5);
         return this;
     }
 
-
     public SpeakerLightBarPowerTestPage verifyScannedFingerMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, FINGER_PRINT_MESSAGE).waitForToBeVisible(2);
+        ActOn.wait(driver, FINGER_PRINT_MESSAGE).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, FINGER_PRINT_MESSAGE).getTextValue();
         //TimeUnit.SECONDS.sleep(5);
         Assert.assertEquals(actualResponse, expectedValue);
@@ -298,7 +354,6 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         String[] SystemTimeArray = systemTime.split(":");
         String SysTime = SystemTimeArray[SystemTimeArray.length - 1];
         int timeOne = Integer.parseInt(SysTime);
-
         //String RTCTime = "RTCTime:19:41:15";
         String[] RTCTimeArray = rtcTime.split(":");
         String RtcTime = RTCTimeArray[RTCTimeArray.length - 1];
@@ -312,24 +367,16 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
 
 
     public SpeakerLightBarPowerTestPage verifyOutOfTheRange(String expectedValue) throws InterruptedException {
-        LOGGER.info("Please ***stay far****to the sensor to verify out of the range.");
+        LOGGER.info("%%%%%%%PLEASE STAY FAR FROM THE DEVICE IT IS VERIFYING OUT OF THE RANGE. %%%%%%%");
+        TimeUnit.SECONDS.sleep(8);
         ActOn.wait(driver, OUT_OF_RANGE).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, OUT_OF_RANGE).getTextValue();
-        Assert.assertEquals(actualResponse, expectedValue);
-        LOGGER.debug("Verified presence sensor out of the range : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
-        TimeUnit.SECONDS.sleep(3);
-        return this;
-    }
+        if (actualResponse.equals(expectedValue)) {
+            //Assert.assertTrue(actualResponse.equals(expectedValue), actualResponse + " doesn't contains " + expectedValue);
+            LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
 
-
-    public SpeakerLightBarPowerTestPage verifyNearestObject(String expectedValue) throws InterruptedException {
-        LOGGER.info("******Please stay close***** to the sensor to verify presence.");
-        //ActOn.wait(driver, NEAREST_OBJECT).waitForToBeVisible(5);
-        String actualResponse = ActOn.element(driver, NEAREST_OBJECT).getTextValue();
-        if (actualResponse.contains(expectedValue)) {
-            Assert.assertTrue(actualResponse.contains(expectedValue), actualResponse + " doesn't contains " + expectedValue);
-            LOGGER.debug("Verified nearest presence : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
-            TimeUnit.SECONDS.sleep(8);
+            LOGGER.debug("Verified presence sensor out of the range : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+            TimeUnit.SECONDS.sleep(5);
             selectPassTest();
         } else {
             LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
@@ -339,11 +386,21 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         return this;
     }
 
-
-    public SpeakerLightBarPowerTestPage clickToTroubleshooting() {
-        ActOn.element(driver, TROUBLESHOOTING).click();
-        //TimeUnit.SECONDS.sleep(6);
-        LOGGER.debug("Clicked on TROUBLESHOOTING to navigate to TROUBLESHOOTING page ");
+    public SpeakerLightBarPowerTestPage verifyNearestObject(String expectedValue) throws InterruptedException {
+        LOGGER.info("%%%%%%%PLEASE STAY CLOSE: VERIFYING THE NEAREST RANGE. %%%%%%%");
+        TimeUnit.SECONDS.sleep(8);
+        ActOn.wait(driver, NEAREST_OBJECT).waitForToBeVisible(5);
+        String actualResponse = ActOn.element(driver, NEAREST_OBJECT).getTextValue();
+        if (actualResponse.contains(expectedValue)) {
+            Assert.assertTrue(actualResponse.contains(expectedValue), actualResponse + " doesn't contains " + expectedValue);
+            LOGGER.debug("Verified nearest presence : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+            TimeUnit.SECONDS.sleep(5);
+            selectPassTest();
+        } else {
+            LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
+            ActOn.element(driver, FAIL_TEST).click();
+            LOGGER.info("Presence test has been failed due to user not present");
+        }
         return this;
     }
 
@@ -354,7 +411,6 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         LOGGER.debug("Verified serial number displaying as expected : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
-
 
     public SpeakerLightBarPowerTestPage verifyKeypadAttached(String expectedValue) {
         String actualResponse = ActOn.element(driver, KEYPAD).getTextValue();
@@ -384,10 +440,14 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         return this;
     }
 
-
 }
 
 
+
+
+
+
+//--------------------------------------------------------------------------------------------------
 //    public SpeakerLightBarPowerTestPage verifyFirstCapturePassedTest(String expectedValue) throws InterruptedException {
 //        ActOn.wait(driver, CAPTURE_PASS_BUTTON).waitForToBeVisible(5);
 //        String actualResponse = ActOn.element(driver, CAPTURE_PASS_BUTTON).getTextValue();
@@ -440,6 +500,35 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
 //        LOGGER.debug("Clicked To Select color Cyan");
 //        return this;
 //    }
+
+//    public SpeakerLightBarPowerTestPage clickToTroubleshooting() {
+//        ActOn.element(driver, TROUBLESHOOTING).click();
+//        //TimeUnit.SECONDS.sleep(6);
+//        LOGGER.debug("Clicked on TROUBLESHOOTING to navigate to TROUBLESHOOTING page ");
+//        return this;
+//    }
+
+
+//    public SpeakerLightBarPowerTestPage verifyOutOdddfTheRange(String expectedValue) throws InterruptedException {
+//        LOGGER.info("Please ***stay far****to the sensor to verify out of the range.");
+//        ActOn.wait(driver, OUT_OF_RANGE).waitForToBeVisible(5);
+//        String actualResponse = ActOn.element(driver, OUT_OF_RANGE).getTextValue();
+//        Assert.assertEquals(actualResponse, expectedValue);
+//        LOGGER.debug("Verified presence sensor out of the range : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+//        TimeUnit.SECONDS.sleep(3);
+//        return this;
+//    }
+
+//
+//    public SpeakerLightBarPowerTestPage verifyFirstCapturePassed(String expectedValue) throws InterruptedException {
+//        ActOn.wait(driver, CAPTURE_PASS_BUTTON).waitForToBeVisible(5);
+//        String actualResponse = ActOn.element(driver, CAPTURE_PASS_BUTTON).getTextValue();
+//        Assert.assertEquals(actualResponse, expectedValue);
+//        LOGGER.debug("Verified First Capture Passed : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+//        TimeUnit.SECONDS.sleep(2);
+//        return this;
+//    }
+
 //------------------------------------------------------------------------------
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;

@@ -13,7 +13,10 @@ import java.util.concurrent.TimeUnit;
 
 public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
 
+
+    //------------------------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(KeypadDisplayTouchTestPage.class.getName());
+    //------------------------------------------------------------------------------------------------------
 
     //Element Locator Details
     private final By KEY_PAD_MESSAGE = By.id("android:id/message");
@@ -80,7 +83,7 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
 
     public KeypadDisplayTouchTestPage ClickDisplayImage() {
         ActOn.element(driver, DISPLAY_IMAGE).click();
-        LOGGER.debug("Clicked to Display Image");
+        LOGGER.debug("Clicked to image in the corner of the screen");
         return this;
     }
 
@@ -91,6 +94,7 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         return this;
     }
 
+
     public KeypadDisplayTouchTestPage ClickPassTest() {
         ActOn.element(driver, PASS_TEST).click();
         LOGGER.debug("Clicked on PassTest button");
@@ -99,6 +103,7 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
     }
 
     public KeypadDisplayTouchTestPage ClickLeftCorner() {
+        ActOn.wait(driver, LEFT_CORNER).waitForToBeVisible(3);
         ActOn.element(driver, LEFT_CORNER).click();
         LOGGER.debug("Clicked on LeftCorner in the screen");
         return this;
@@ -146,8 +151,9 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         driver.manage().timeouts().implicitlyWait(second, TimeUnit.SECONDS);
     }
 
-    public KeypadDisplayTouchTestPage ClickToStopRecord() throws InterruptedException {
+    public KeypadDisplayTouchTestPage ClickToStopRecord() {
         ActOn.element(driver, RECORD_BUTTON).click();
+        waitFor(5);
         LOGGER.debug("Clicked on Record button");
         return this;
     }
@@ -173,6 +179,9 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
 }
 
 
+//---------------------------------------------------------------------------------------
+//*
 //private static final Logger LOGGER = LogManager.getLogger(NavigationPageTestMode.class);
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
+//*

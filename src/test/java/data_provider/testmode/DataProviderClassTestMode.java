@@ -23,4 +23,12 @@ public class DataProviderClassTestMode {
         };
     }
 
+    //Validate DiDo Camera Test
+    @DataProvider(name = "didoCameraTestPageData")
+    public Object[][] storeDidoCameraPageData() {
+        return new Object[][]{
+                {"Camera preview should show and white light at the top of the screen should be on."}
+        };
+    }
+
 }

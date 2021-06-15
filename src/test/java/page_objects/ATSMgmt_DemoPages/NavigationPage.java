@@ -3,7 +3,6 @@ package page_objects.ATSMgmt_DemoPages;
 import command_providers.ActOn;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,17 +15,17 @@ public class NavigationPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(NavigationPage.class.getName());
     //---------------------------------------------------------------------------------
 
-
+    //Element Locator
     private final By GET_SETUP_PARA = By.id("com.accutime.atsmgmtdemo:id/btn_go_to_get_setup_params_activity");
     private final By SET_SETUP_PARA = By.id("com.accutime.atsmgmtdemo:id/btn_go_to_set_setup_params_activity");
     private final By RESET_PASS = By.id("com.accutime.atsmgmtdemo:id/btn_go_to_reset_passwords_activity");
     private final By SET_SYS_TIME = By.id("com.accutime.atsmgmtdemo:id/btn_go_to_set_system_time_activity");
-    //private final By setSystemTime = By.id("com.accutime.atsmgmtdemo:id/btn_go_to_get_free_disk_space_activity");
+    private final By PULL_SETUP_PARA = By.id("btn_go_to_pull_setup_params_activity");
 
+    //-------------------------------------------------------------------------------------
+    public NavigationPage(AndroidDriver driver) { this.driver = driver;}
+    //-------------------------------------------------------------------------------------
 
-    public NavigationPage(AndroidDriver driver) {
-        this.driver = driver;
-    }
 
     //Get setup parameter
     public GetSetUpParameterPage navigateToGetSetUpParameterPage() {
@@ -54,6 +53,12 @@ public class NavigationPage {
         ActOn.element(driver, SET_SYS_TIME).click();
         LOGGER.info("User navigated to Set SystemTime page");
         return new SetSystemTimePage(driver);
+    }
+
+    public PullSetupParametersPage navigateToPullSetupPara() {
+        ActOn.element(driver, PULL_SETUP_PARA).click();
+        LOGGER.info("User navigated to pull setup parameter page");
+        return new PullSetupParametersPage(driver);
     }
 
 }

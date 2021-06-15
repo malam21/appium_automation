@@ -12,7 +12,10 @@ public class NavigationPageClockSetup {
 
     public AndroidDriver<MobileElement> driver;
 
+    //-----------------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(NavigationPageClockSetup.class.getName());
+    //-----------------------------------------------------------------------------------------------
+
     //Element Locator
     private final By SETUP_BUTTON = By.id("com.accutime.clocksetup:id/btn_setup");
     private final By HELP_BUTTON = By.id("com.accutime.clocksetup:id/btn_help");
@@ -23,6 +26,7 @@ public class NavigationPageClockSetup {
     private final By VAR_ADMIN = By.id("com.accutime.clocksetup:id/radio_var_admin");
     private final By VAR_PASSWORD = By.id("com.accutime.clocksetup:id/et_password");
     private final By TERMINAL = By.id("com.accutime.clocksetup:id/btn_terminal");
+    private final By OK_BUTTON = By.id("android:id/button1");
 
 
     public NavigationPageClockSetup(AndroidDriver driver) {
