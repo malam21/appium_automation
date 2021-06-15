@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import page_objects.ATSMgmt_DemoPages.NavigationPage;
 import utilities.ReadConfigFiles;
 
+import java.io.IOException;
+
 
 public class ValidateSetupParameter extends ATSMgmt_BaseClass {
 
@@ -14,25 +16,28 @@ public class ValidateSetupParameter extends ATSMgmt_BaseClass {
                                     String cellUserPassword, String cellServer, String cellMCC, String cellMNC, String hostURL, String hostUserName, String hostPassword,
                                     String hostSetupSuccessfulMessage, String dayemonsSetupSuccessfulMessage, String region, String location, String ntpServer, String timeSetupSuccessfulMessage,
                                     String userExpInfo, String UserExpSetupSuccessfulMessage, String terminalName, String terminalSetupSuccessfulMessage, String logEnaType, String maxFileSize,
-                                    String timeInter, String logSuccessfulMessage, String PeriSuccessfulMessage, String valueZero, String valueOne, String valueTwo, String ReaderSettingsMessage) throws InterruptedException {
+                                    String timeInter, String logSuccessfulMessage, String PeriSuccessfulMessage, String valueZero, String valueOne, String valueTwo, String ReaderSettingsMessage) throws InterruptedException, IOException {
 
         new NavigationPage(driver)
                 .navigateToSetSetUpParameterPage()
                 .enterPassword(ReadConfigFiles.getPropertyValue("Password"))
                 .clickDHCP()
+                .clickEthernetSettings()
                 .clickDHCP()
-                .clickDHCP()
+                //.clickDHCP()
                 .enterFixedIP(strIP)
                 .enterSubnetMask(strSumask)
                 .enterDNSServer(strDNS)
                 .enterGateway(strGetWay)
+                .clickDHCP()
                 .clickEthernetSettings()
                 .validateEthernetSettingsMessage(ethernetSetupSuccessfulMessage)
-                .clickDHCP()
+                //.clickDHCP()
                 .clearFixedIP()
                 .clearSubnetMask()
                 .clearDNSServer()
                 .clearGateway()
+                .clickEthernetSettings()
                 .clickWifi()
                 .enterSSID(strSSID)
                 .enterWifiPassword(wifiPass)
@@ -54,15 +59,16 @@ public class ValidateSetupParameter extends ATSMgmt_BaseClass {
                 .enterCellMNC(cellMNC)
                 //.clickCellularEnable()
                 .clearToUncheckCellularEnable()
-                .clearCellularName(celluProviName)
-                .clearCelluAPN(cellAPN)
-                .clearCelluProxy(cellProxy)
-                .clearCelluPort(cellPort)
-                .clearCellUserName(cellUser)
-                .clearCellUserPassword(cellUserPassword)
-                .clearCellServer(cellServer)
-                .clearCellMCC(cellMCC)
-                .clearCellMNC(cellMNC)
+                .clearCellularName()
+                .clearCelluAPN()
+
+                .clearCelluProxy()
+                .clearCelluPort()
+                .clearCellUserName()
+                .clearCellUserPassword()
+                .clearCellServer()
+                .clearCellMCC()
+                .clearCellMNC()
                 .enterHostURL(hostURL)
                 .enterHostUserName(hostUserName)
                 .enterHostPassword(hostPassword)
@@ -98,7 +104,9 @@ public class ValidateSetupParameter extends ATSMgmt_BaseClass {
                 .clickReaderSettings()
                 .enterFingerCompatible(valueOne)
                 .clickReaderSettings()
-                .validateReaderSettingsMessage(ReaderSettingsMessage);
+                .validateReaderSettingsMessage(ReaderSettingsMessage)
+                .clickBackButton();
+
     }
 }
 

@@ -4,9 +4,9 @@
 <!--<suite name="automation_test" verbose="1" parallel="classes" thread-count="2">-->
 <suite name="automation_script" verbose="1">
     <suite-files>
-<!--        <suite-file path="atsMgmtDemo.xml"></suite-file>-->
+        <suite-file path="atsMgmtDemo.xml"></suite-file>
         <suite-file path="clockSetup.xml"></suite-file>
-<!--        <suite-file path="testMode.xml"></suite-file>-->
+        <suite-file path="testMode.xml"></suite-file>
 
     </suite-files>
 </suite>

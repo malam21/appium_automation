@@ -1,19 +1,26 @@
 package page_objects.ATSMgmt_DemoPages;
 
 import command_providers.ActOn;
+import command_providers.ElementActions;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import java.io.IOException;
+
+
+
 
 public class SetResetPasswordPage extends NavigationPage {
 
-//    private static final Logger LOGGER = LogManager.getLogger(NavigationPage.class);
-    private static final Logger LOGGER = LoggerFactory.getLogger(SetResetPasswordPage.class.getName());
+
+    //--------------------------------------------------------------------------------------------
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetSetUpParameterPage.class.getName());
+    //--------------------------------------------------------------------------------------------
+
+    //Element Locator
     private final By CURR_VAR_PASS = By.id("com.accutime.atsmgmtdemo:id/et_current_var_password");
     private final By NEW_VAR_PASS = By.id("com.accutime.atsmgmtdemo:id/et_new_var_password");
     private final By NEW_END_USER_PASS = By.id("com.accutime.atsmgmtdemo:id/et_new_end_user_password");
@@ -52,9 +59,9 @@ public class SetResetPasswordPage extends NavigationPage {
         LOGGER.debug("Clicked on Reset Password Checkbox");
         return this;
     }
-    public SetResetPasswordPage validatePassResetErrorMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, PASS_RESET_ERROR_MESS);
-        Thread.sleep(5000);
+    public SetResetPasswordPage validatePassResetErrorMessage(String expectedValue) {
+        ActOn.wait(driver, PASS_RESET_ERROR_MESS).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, PASS_RESET_ERROR_MESS).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
@@ -73,11 +80,12 @@ public class SetResetPasswordPage extends NavigationPage {
         return this;
     }
 
-    public SetResetPasswordPage validatePassResetSuccessfulMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, PASS_RESET_ERROR_MESS);
-        Thread.sleep(5000);
+    public SetResetPasswordPage validatePassResetSuccessfulMessage(String expectedValue) throws  IOException {
+        ActOn.wait(driver, PASS_RESET_ERROR_MESS).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, PASS_RESET_ERROR_MESS).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }

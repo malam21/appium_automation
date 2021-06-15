@@ -8,7 +8,7 @@ public class DataProviderClockSetup {
     @DataProvider(name = "clockSetupData")
     public Object[][] storeClockSetupData() {
         return new Object[][]{
-                {"Invalid password.", "A3-03.15-31be9a9", "323232", "50:80:4a:4a:fc:07", "2019061", "1", "https://ats-setup-server.accu-time.com/SetupServer/",
+                {"Invalid password.", "A3-03.15-31be9a9", "323232", "52:04:1B:82:38:AB", "2019061", "1", "https://ats-setup-server.accu-time.com/SetupServer/",
                         "Admin", "1234"}
         };
     }
@@ -25,7 +25,8 @@ public class DataProviderClockSetup {
     @DataProvider(name = "clockSetupWifiSettings")
     public Object[][] storeWifiSetupData() {
         return new Object[][]{
-                {"ATS", "1a2B3c4D+++", "Invalid Wifi DNS Server", "192.168.128.86", "255.255.252.0", "192.168.128.10", "192.168.128.10", "192.168.128.10", "192.168.128.254"}
+                {"ATS", "1a2B3c4D+++", "Ethernet connected - cannot connect to Wi-Fi. Disconnect the Ethernet Cable and try again.", "192.168.128.86", "255.255.252.0", "192.168.128.10", "192.168.128.254"}
+                //{"ATS", "1a2B3c4D+++", "Invalid Wifi DNS Server", "192.168.128.86", "255.255.252.0", "192.168.128.10", "192.168.128.10", "192.168.128.10", "192.168.128.254"}
         };
     }
 
@@ -34,7 +35,7 @@ public class DataProviderClockSetup {
     public Object[][] storeHostCellDaeSetupData() {
         return new Object[][]{
                 {"htps://ats-sota.accu-time.com", "Admin", "abc123", "T-Mobile", "Tester", "323", "T-MobileServer", " Proxy server", "cellAPN", "1234", "231", "3121"
-                        , "Settings may require a reboot to take effect.", "ADB Instructions", "IP Address: 192.168.1.220", "pool.ntp.org"}
+                        , "Settings may require a reboot to take effect.", "ADB Instructions", "IP Address: 192.168.1.237", "pool.ntp.org"}
         };
     }
 

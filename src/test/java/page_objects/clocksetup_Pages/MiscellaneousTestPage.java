@@ -12,8 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MiscellaneousTestPage extends NavigationPageClockSetup {
 
-
+    //---------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(MiscellaneousTestPage.class.getName());
+    //---------------------------------------------------------------------------------------
 
 
     //Element Locator Details
@@ -27,9 +28,6 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     private final By RESET_USER_PASS = By.id("com.accutime.clocksetup:id/btn_reset_end_user_password");
     private final By RESET_MESSAGE = By.id("android:id/message");
     private final By OK_BUTTON = By.id("android:id/button1");
-    private final By SETUP_BUTTON = By.id("com.accutime.clocksetup:id/btn_setup");
-    private final By VAR_ADMIN = By.id("com.accutime.clocksetup:id/radio_var_admin");
-    private final By VAR_PASSWORD = By.id("com.accutime.clocksetup:id/et_password");
     private final By LOGIN = By.id("com.accutime.clocksetup:id/btn_login");
     private final By NEW_PASS = By.id("com.accutime.clocksetup:id/et_new_password");
     private final By VERIFY_NEW_PASS = By.id("com.accutime.clocksetup:id/et_verify_password");
@@ -39,6 +37,10 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     private final By CURRENT_STARTUP_APP = By.id("com.accutime.clocksetup:id/tv_current_startup_application");
     private final By CLOCK_SETUP_APP = By.xpath("//*[@resource-id=\"com.accutime.clocksetup:id/app_name\"][@text=\"Clock Setup\"]");
 
+    //private final By SETUP_BUTTON = By.id("com.accutime.clocksetup:id/btn_setup");
+    //private final By VAR_ADMIN = By.id("com.accutime.clocksetup:id/radio_var_admin");
+    //private final By VAR_PASSWORD = By.id("com.accutime.clocksetup:id/et_password");
+
     //---------------------------------------------------------------------------------------
     public MiscellaneousTestPage(AndroidDriver<MobileElement> driver) {
         super(driver);
@@ -46,9 +48,8 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     //---------------------------------------------------------------------------------------
 
 
-    public MiscellaneousTestPage clickToSWUpdate() throws InterruptedException {
-        //ActOn.wait(driver, SW_UPDATE).waitForToBeVisible(6);
-        Thread.sleep(5000);
+    public MiscellaneousTestPage clickToSWUpdate() {
+        ActOn.wait(driver, SW_UPDATE).waitForToBeVisible(6);
         ActOn.element(driver, SW_UPDATE).click();
         LOGGER.debug("Clicked to SW_UPDATE button to navigate to SW_Update page");
         return this;
@@ -57,7 +58,7 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     public MiscellaneousTestPage enterSotaURL(String value) {
         ActOn.element(driver, SOT_URL).click();
         ActOn.element(driver, SOT_URL).setValue(value);
-        LOGGER.debug("Sota_url entered successfully");
+        LOGGER.debug("Sota url entered successfully");
         return this;
     }
 
@@ -81,22 +82,20 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public MiscellaneousTestPage verifyNoUpdateMessage(String expectedValue) throws InterruptedException {
         LOGGER.info("******Validating only no update message.");
-        //ActOn.wait(driver, NEAREST_OBJECT).waitForToBeVisible(5);
+        //ActOn.wait(driver, NO_UPDATE_MESSAGE).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, NO_UPDATE_MESSAGE).getTextValue();
         if (actualResponse.contains(expectedValue)) {
             Assert.assertTrue(actualResponse.contains(expectedValue), actualResponse + " doesn't contains " + expectedValue);
             LOGGER.debug("Verified contains match : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
             LOGGER.info("Verified contains match due to no available update");
             TimeUnit.SECONDS.sleep(8);
-            clickToCancel();
         } else {
             LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
-            LOGGER.info("Verified contains did not match at all and need tester attention");
-            clickToCancel();
+            LOGGER.info("Verified contains did not match need update need tester attention");
         }
+        clickToCancel();
         return this;
     }
 
@@ -105,7 +104,6 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
         LOGGER.debug("Access Security button has been clicked");
         return this;
     }
-
 
     public MiscellaneousTestPage clickToUserPassReset() {
         ActOn.element(driver, RESET_USER_PASS).click();
@@ -126,22 +124,6 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public MiscellaneousTestPage navigateToSetupPageCSetup() {
-        ActOn.wait(driver, SETUP_BUTTON).waitForToBeVisible(4);
-        ActOn.element(driver, SETUP_BUTTON).click();
-        LOGGER.info("User navigated to setup test page.");
-        return this;
-    }
-
-
-    public MiscellaneousTestPage enterVarPassword(String value) {
-        ActOn.element(driver, VAR_ADMIN).click();
-        ActOn.element(driver, VAR_PASSWORD).setValue(value);
-        LOGGER.debug("Entered Password successfully");
-        return this;
-    }
-
-
     public MiscellaneousTestPage clickToLogin() throws InterruptedException {
         ActOn.element(driver, LOGIN).click();
         TimeUnit.SECONDS.sleep(2);
@@ -156,7 +138,6 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
         LOGGER.debug("Entered new password successfully");
         return this;
     }
-
 
     public MiscellaneousTestPage enterVerifyNewPassword(String value) {
         ActOn.element(driver, VERIFY_NEW_PASS).click();
@@ -173,15 +154,14 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     private void scrollToElement(String strText) {
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + strText + "\").instance(0))").click();
     }
 
-
     public MiscellaneousTestPage clickToUserExperience() throws InterruptedException {
+        ActOn.wait(driver, USER_EXPERIENCE).waitForToBeVisible(6);
         ActOn.element(driver, USER_EXPERIENCE).click();
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(4);
         LOGGER.debug("Clicked to open User Experience");
         return this;
     }
@@ -189,7 +169,7 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     public MiscellaneousTestPage clickToSelectTestModeApp() throws InterruptedException {
         scrollToElement("TestMode");
         ActOn.element(driver, TEST_MODE_APP).click();
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(4);
         LOGGER.debug("Clicked to open User Experience");
         return this;
     }
@@ -213,22 +193,7 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//---------------------------------------------------------------------------------------------
 
 //    public MiscellaneousTestPage verifyResetMessage(String expectedValue) {
 //        String actualResponse = ActOn.element(driver, RESET_MESSAGE).getTextValue();
@@ -237,6 +202,16 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
 //        return this;
 //    }
 
+//    public MiscellaneousTestPage navigateToSetupPageCSetup() {
+//        ActOn.wait(driver, SETUP_BUTTON).waitForToBeVisible(4);
+//        ActOn.element(driver, SETUP_BUTTON).click();
+//        LOGGER.info("User navigated to setup test page.");
+//        return this;
+//    }
 
-
-
+//    public MiscellaneousTestPage enterVarPassword(String value) {
+//        ActOn.element(driver, VAR_ADMIN).click();
+//        ActOn.element(driver, VAR_PASSWORD).setValue(value);
+//        LOGGER.debug("Entered Password successfully");
+//        return this;
+//    }

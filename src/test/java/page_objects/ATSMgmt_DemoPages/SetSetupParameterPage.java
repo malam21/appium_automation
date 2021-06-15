@@ -1,6 +1,7 @@
 package page_objects.ATSMgmt_DemoPages;
 
 import command_providers.ActOn;
+import command_providers.ElementActions;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -8,10 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.io.IOException;
+
 
 public class SetSetupParameterPage extends NavigationPage {
 
+    //--------------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(SetSetupParameterPage.class.getName());
+    //--------------------------------------------------------------------------------------------
+
+
+    //Element Locator
     private final By VarPassword = By.id("com.accutime.atsmgmtdemo:id/et_var_password");
     //Ethernet Settings
     private final By DHCP = By.id("com.accutime.atsmgmtdemo:id/cb_dhcp");
@@ -79,13 +87,16 @@ public class SetSetupParameterPage extends NavigationPage {
     private final By FINGER_COMPATIBLE = By.id("com.accutime.atsmgmtdemo:id/et_fingerprint_compatibility_mode");
     private final By READER_SETTING_MESSAGE = By.id("com.accutime.atsmgmtdemo:id/response");
     private final By READER_SETTINGS = By.id("com.accutime.atsmgmtdemo:id/btn_set_readers_settings");
+    private final By BACK_BUTTON = By.id("com.accutime.atsmgmtdemo:id/btn_back");
 
-    //------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------
     public SetSetupParameterPage(AndroidDriver<MobileElement> driver) {
         super(driver);
     }
+    //-----------------------------------------------------------------------------------
 
-    //------------------------------------------------------------------------
+
     //-----------------------------------------------------------------------
     public SetSetupParameterPage ReaderSettingsDisplayed() {
         ActOn.element(driver, READER_SETTINGS).displayed();
@@ -93,12 +104,9 @@ public class SetSetupParameterPage extends NavigationPage {
     }
 
 
-    //-----------------------------------------------------------------------
-    //------------------------------------------------------------------------
-
     public SetSetupParameterPage enterPassword(String value) {
         ActOn.element(driver, VarPassword).setValue(value);
-        LOGGER.debug("Entered Password successfully");
+        LOGGER.debug("Password entered successfully");
         return this;
     }
 
@@ -111,25 +119,25 @@ public class SetSetupParameterPage extends NavigationPage {
 
     public SetSetupParameterPage enterFixedIP(String value) {
         ActOn.element(driver, FIXED_IP).setValue(value);
-        LOGGER.debug("Entered FixedIP successfully");
+        LOGGER.debug("FixedIP entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterSubnetMask(String value) {
         ActOn.element(driver, SUBNET_MASK).setValue(value);
-        LOGGER.debug("Entered Subnet Mask successfully");
+        LOGGER.debug("Subnet Mask entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterDNSServer(String value) {
         ActOn.element(driver, DNS_SERVER).setValue(value);
-        LOGGER.debug("Entered DNSServer successfully");
+        LOGGER.debug("DNSServer entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterGateway(String value) {
         ActOn.element(driver, GATEWAY).setValue(value);
-        LOGGER.debug("Entered Gateway successfully");
+        LOGGER.debug("Gateway entered successfully");
         return this;
     }
 
@@ -140,19 +148,20 @@ public class SetSetupParameterPage extends NavigationPage {
     }
 
 
-    public SetSetupParameterPage validateEthernetSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, ETHERNET_SETTINGS_MESSAGE);
+    public SetSetupParameterPage validateEthernetSettingsMessage(String expectedValue) throws InterruptedException, IOException {
         Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, ETHERNET_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
     //------------------------------------------------------------------------
 
     public SetSetupParameterPage clearFixedIP() {
+        driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollBackward()");
         ActOn.element(driver, FIXED_IP).clear();
-        LOGGER.debug("FixedIP field cleared successfully");
+        LOGGER.debug("FixedIP field successfully cleared");
         return this;
     }
 
@@ -188,7 +197,6 @@ public class SetSetupParameterPage extends NavigationPage {
     }
 
     public SetSetupParameterPage enterSSID(String value) {
-        //driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, SSID).setValue(value);
         LOGGER.debug("Entered SSID successfully");
         return this;
@@ -207,11 +215,11 @@ public class SetSetupParameterPage extends NavigationPage {
         return this;
     }
 
-    public SetSetupParameterPage validateWifiSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, WIFI_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateWifiSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, WIFI_SETTINGS_MESSAGE).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, WIFI_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate WifiSettingsMessage Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
@@ -229,16 +237,12 @@ public class SetSetupParameterPage extends NavigationPage {
     }
 
     public SetSetupParameterPage clickWifitoUncheck() {
-        //scrollToElement("WIFI");
-        //driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
-        //Thread.sleep(2000);
         ActOn.element(driver, WIFI).click();
         LOGGER.debug("Clicked on Wifi to Uncheck box");
         return this;
     }
 
     public SetSetupParameterPage clickCellularEnable() {
-        //scrollToElement("cellular Enable");
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, CELLULAR_ENABLE).click();
         LOGGER.debug("Clicked on CellularEnable check box");
@@ -247,164 +251,159 @@ public class SetSetupParameterPage extends NavigationPage {
 
     public SetSetupParameterPage enterCellularName(String value) {
         ActOn.element(driver, CELLULAR_NAME).setValue(value);
-        LOGGER.debug("Entered CellularName successfully");
+        LOGGER.debug("CellularName entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCelluAPN(String value) {
         ActOn.element(driver, CELLULAR_APN).setValue(value);
-        LOGGER.debug("Entered CellularAPN successfully");
+        LOGGER.debug("CellularAPN entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCelluProxy(String value) {
         ActOn.element(driver, CELLULAR_PROXY).setValue(value);
-        LOGGER.debug("Entered CellularPROXY successfully");
+        LOGGER.debug("CellularPROXY entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCelluPort(String value) {
         ActOn.element(driver, CELLULAR_PORT).setValue(value);
-        LOGGER.debug("Entered CellularPort successfully");
+        LOGGER.debug("CellularPort entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCellUserName(String value) {
-        //scrollToElement("MCC");
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, CELLULAR_USER_NAME).setValue(value);
-        LOGGER.debug("Entered CellUserName successfully");
+        LOGGER.debug("CellUserName entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCellUserPassword(String value) {
         ActOn.element(driver, CELLULAR_PASSWORD).setValue(value);
-        LOGGER.debug("Entered CellUserPassword successfully");
+        LOGGER.debug("CellUser Password entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCellServer(String value) {
         ActOn.element(driver, CELL_SERVER).setValue(value);
-        LOGGER.debug("Entered CellServer successfully");
+        LOGGER.debug("CellServer entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCellMCC(String value) {
         ActOn.element(driver, CELL_MMC).setValue(value);
-        LOGGER.debug("Entered CellMCC successfully");
+        LOGGER.debug("CellMCC entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterCellMNC(String value) {
         //scrollToElement("Host");
         ActOn.element(driver, CELL_MNC).setValue(value);
-        LOGGER.debug("Entered CellMNC successfully");
+        LOGGER.debug("CellMNC entered successfully");
         return this;
     }
 
 
     //__________Remove entered data
-    public SetSetupParameterPage clearToUncheckCellularEnable() throws InterruptedException {
-        //scrollToElement("cellular Enable");
+    public SetSetupParameterPage clearToUncheckCellularEnable() {
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollBackward()");
-        //Thread.sleep(2000);
-
-        //ActOn.wait(driver,CELLULAR_ENABLE);
         ActOn.element(driver, CELLULAR_ENABLE).click();
         LOGGER.debug("Clicked on CellularEnable check box");
         return this;
     }
 
-    public SetSetupParameterPage clearCellularName(String value) throws InterruptedException {
+    public SetSetupParameterPage clearCellularName() {
         ActOn.element(driver, CELLULAR_NAME).clear();
         LOGGER.debug("Entered CellularName cleared successfully");
         return this;
     }
 
-    public SetSetupParameterPage clearCelluAPN(String value) {
+    public SetSetupParameterPage clearCelluAPN() {
         ActOn.element(driver, CELLULAR_APN).clear();
-        LOGGER.debug("Entered CellularAPN successfully");
+        LOGGER.debug("CellularAPN entered successfully");
         return this;
     }
 
-    public SetSetupParameterPage clearCelluProxy(String value) {
+    public SetSetupParameterPage clearCelluProxy() {
         ActOn.element(driver, CELLULAR_PROXY).clear();
-        LOGGER.debug("Entered CellularPROXY successfully");
+        LOGGER.debug("CellularPROXY cleared successfully");
         return this;
     }
 
-    public SetSetupParameterPage clearCelluPort(String value) {
+    public SetSetupParameterPage clearCelluPort() {
 
         ActOn.element(driver, CELLULAR_PORT).clear();
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
-        LOGGER.debug("Entered CellularPort successfully");
+        LOGGER.debug("CellularPort cleared successfully");
         return this;
     }
 
-    public SetSetupParameterPage clearCellUserName(String value) {
+    public SetSetupParameterPage clearCellUserName() {
         ActOn.element(driver, CELLULAR_USER_NAME).clear();
-        LOGGER.debug("Entered CellUserName successfully");
+        LOGGER.debug("CellUserName cleared successfully");
         return this;
     }
 
 
-    public SetSetupParameterPage clearCellUserPassword(String value) {
+    public SetSetupParameterPage clearCellUserPassword() {
         ActOn.element(driver, CELLULAR_PASSWORD).clear();
-        LOGGER.debug("Entered CellUserPassword successfully");
+        LOGGER.debug("CellUserPassword cleared successfully");
         return this;
     }
 
-    public SetSetupParameterPage clearCellServer(String value) {
+    public SetSetupParameterPage clearCellServer() {
         ActOn.element(driver, CELL_SERVER).clear();
-        LOGGER.debug("Entered CellServer successfully");
+        LOGGER.debug("CellServer cleared successfully");
         return this;
     }
 
-    public SetSetupParameterPage clearCellMCC(String value) {
+    public SetSetupParameterPage clearCellMCC() {
         ActOn.element(driver, CELL_MMC).clear();
-        LOGGER.debug("Entered CellMCC successfully");
+        LOGGER.debug("CellMCC cleared successfully");
         return this;
     }
 
-    public SetSetupParameterPage clearCellMNC(String value) {
+    public SetSetupParameterPage clearCellMNC() {
         //scrollToElement("Host");
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, CELL_MNC).clear();
-        LOGGER.debug("Entered CellMNC successfully");
+        LOGGER.debug("CellMNC cleared successfully");
         return this;
     }
 
     public SetSetupParameterPage enterHostURL(String value) {
         ActOn.element(driver, HOST_URL).setValue(value);
-        LOGGER.debug("Entered HostURL successfully");
+        LOGGER.debug("HostURL entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterHostUserName(String value) {
         ActOn.element(driver, HOST_USER_NAME).setValue(value);
-        LOGGER.debug("Entered HostUserName successfully");
+        LOGGER.debug("HostUserName entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterHostPassword(String value) {
         ActOn.element(driver, HOST_PASSWORD).setValue(value);
-        LOGGER.debug("Entered HostPassword successfully");
+        LOGGER.debug("HostPassword entered successfully");
         return this;
     }
 
     public SetSetupParameterPage clickHostSettings() {
-        //scrollToElement("SET HOST");
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, HOST_SETTINGS).click();
         LOGGER.debug("Clicked on HostSettings");
         return this;
     }
 
-    public SetSetupParameterPage validateHostSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, HOST_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateHostSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, HOST_SETTINGS_MESSAGE).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, HOST_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate HostSettingsMessage Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
@@ -422,11 +421,12 @@ public class SetSetupParameterPage extends NavigationPage {
         return this;
     }
 
-    public SetSetupParameterPage validateDaymonsSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, DAEMONS_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateDaymonsSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, DAEMONS_SETTINGS_MESSAGE).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, DAEMONS_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
 
@@ -434,48 +434,48 @@ public class SetSetupParameterPage extends NavigationPage {
 
     public SetSetupParameterPage enterRegion(String value) {
         ActOn.element(driver, REGION).setValue(value);
-        LOGGER.debug("Entered Region successfully");
+        LOGGER.debug("Region name entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterLocation(String value) {
         ActOn.element(driver, LOCATION).setValue(value);
-        LOGGER.debug("Entered Gateway successfully");
+        LOGGER.debug("Location name entered successfully");
         return this;
     }
 
     public SetSetupParameterPage clickNTPCheckbox() {
         ActOn.element(driver, NTP_CHECK_BOX).click();
-        LOGGER.debug("Clicked on NTPCheckbox Checkbox");
+        LOGGER.debug("Clicked on NTP Checkbox");
         return this;
     }
 
     public SetSetupParameterPage enterNTPServer(String value) {
         ActOn.element(driver, NTP_SERVER).setValue(value);
-        LOGGER.debug("Entered NTPServer successfully");
+        LOGGER.debug("NTPServer name entered successfully");
         return this;
     }
 
     public SetSetupParameterPage clickTimeSettings() {
-        //scrollToElement("TIME SETTINGS");
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, TIME_SETTINGS).click();
-        LOGGER.debug("Clicked on DHCP Checkbox");
+        LOGGER.debug("Clicked on Set Time Settings");
         return this;
     }
 
-    public SetSetupParameterPage validateTimeSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, TIME_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateTimeSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, TIME_SETTINGS_MESSAGE).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, TIME_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
 
     public SetSetupParameterPage enterUserExpInfo(String value) {
         ActOn.element(driver, USER_EXP_INFO).setValue(value);
-        LOGGER.debug("Entered Password successfully");
+        LOGGER.debug("Password entered successfully");
         return this;
     }
 
@@ -485,11 +485,11 @@ public class SetSetupParameterPage extends NavigationPage {
         return this;
     }
 
-    public SetSetupParameterPage validateUserEspSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, USER_EXP_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateUserEspSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, USER_EXP_SETTINGS_MESSAGE).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, USER_EXP_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
@@ -497,7 +497,7 @@ public class SetSetupParameterPage extends NavigationPage {
     public SetSetupParameterPage enterTerminalName(String value) {
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, TERMINAL_NAME).setValue(value);
-        LOGGER.debug("Entered Password successfully");
+        LOGGER.debug("Password entered successfully");
         return this;
     }
 
@@ -508,34 +508,32 @@ public class SetSetupParameterPage extends NavigationPage {
     }
 
 
-    public SetSetupParameterPage validateTerminalSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, TERMINAL_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateTerminalSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, TERMINAL_SETTINGS_MESSAGE).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, TERMINAL_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
 
 
     public SetSetupParameterPage enterLogEnableType(String value) {
-        //driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, LOG_ENABLE_TYPE).setValue(value);
-        LOGGER.debug("Entered EnableType successfully");
+        LOGGER.debug("EnableType entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterMaxFileSize(String value) {
-        //driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, MAX_FILE_SIZE).setValue(value);
-        LOGGER.debug("Entered MaxFileSize successfully");
+        LOGGER.debug("MaxFileSize entered successfully");
         return this;
     }
 
     public SetSetupParameterPage enterTimeInterval(String value) {
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, TIME_INTERVAL).setValue(value);
-        LOGGER.debug("Entered TimeInterval successfully");
+        LOGGER.debug("TimeInterval entered successfully");
         return this;
     }
 
@@ -545,11 +543,12 @@ public class SetSetupParameterPage extends NavigationPage {
         return this;
     }
 
-    public SetSetupParameterPage validateLogSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, LOG_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateLogSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, LOG_SETTINGS_MESSAGE).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, LOG_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
@@ -573,18 +572,19 @@ public class SetSetupParameterPage extends NavigationPage {
         return this;
     }
 
-    public SetSetupParameterPage validatePeripheralsSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, PERI_SETTINGS_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validatePeripheralsSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, PERI_SETTINGS_MESSAGE).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, PERI_SETTINGS_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate PeripheralsSettingsMessage Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
 
     public SetSetupParameterPage enterFingerCompatible(String value) {
         ActOn.element(driver, FINGER_COMPATIBLE).setValue(value);
-        LOGGER.debug("Entered FingerCompatible value successfully");
+        LOGGER.debug("FingerCompatible value entered successfully");
         return this;
     }
 
@@ -594,14 +594,22 @@ public class SetSetupParameterPage extends NavigationPage {
         return this;
     }
 
-    public SetSetupParameterPage validateReaderSettingsMessage(String expectedValue) throws InterruptedException {
-        ActOn.wait(driver, READER_SETTING_MESSAGE);
-        Thread.sleep(5000);
+    public SetSetupParameterPage validateReaderSettingsMessage(String expectedValue) throws IOException {
+        ActOn.wait(driver, READER_SETTING_MESSAGE).waitForToBeVisible(5);
+        //Thread.sleep(5000);
         String actualResponse = ActOn.element(driver, READER_SETTING_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
+        ElementActions.takeScreenShot();
         LOGGER.debug("validate PeripheralsSettingsMessage Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
+
+    public SetSetupParameterPage clickBackButton() {
+        ActOn.element(driver, BACK_BUTTON).click();
+        LOGGER.debug("Clicked on BackButton to return to main page");
+        return this;
+    }
+
 }
 
 

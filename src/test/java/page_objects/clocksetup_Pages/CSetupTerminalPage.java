@@ -7,15 +7,17 @@ import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class CSetupTerminalPage extends NavigationPageClockSetup {
 
 
+    //----------------------------------------------------------------------------------------------
     private static final Logger LOGGER = LoggerFactory.getLogger(CSetupTerminalPage.class.getName());
+    //----------------------------------------------------------------------------------------------
 
 
     //Element Locator Details
     private final By DONE_BUTTON = By.id("com.accutime.clocksetup:id/btn_done");
-    private final By CANCEL_BUTTON = By.id("com.accutime.clocksetup:id/cancel_button");
     private final By TERMINAL_NAME = By.id("com.accutime.clocksetup:id/et_terminal_name");
     private final By TERMINAL_TYPE = By.id("com.accutime.clocksetup:id/sp_terminal_type");
     private final By TERMINAL_MAME_QUES = By.id("com.accutime.clocksetup:id/tooltip_terminal_name");
@@ -44,28 +46,20 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
     private final By TIME_INTERVAL_QUES = By.id("com.accutime.clocksetup:id/tooltip_time_interval");
     private final By LOGGING_DISABLE = By.id("com.accutime.clocksetup:id/radio_disable_logging");
     private final By LOG_TO_DEVICE = By.id("com.accutime.clocksetup:id/radio_log_to_device");
-
     private final By SCREEN_SIZE = By.id("com.accutime.clocksetup:id/btn_screen_settings");
     private final By TRIGGER_DISTANCE = By.id("com.accutime.clocksetup:id/et_tof_trigger_distance");
     private final By TIMEOUT = By.id("com.accutime.clocksetup:id/et_tof_timeout");
     private final By TRIG_DIS_QUES = By.id("com.accutime.clocksetup:id/tooltip_tof_trigger_distance");
     private final By TIMEOUT_QUES = By.id("com.accutime.clocksetup:id/tooltip_tof_timeout");
+    //private final By OK_BUTTON = By.id("android:id/button1");
+    //private final By CANCEL_BUTTON = By.id("com.accutime.clocksetup:id/cancel_button");
 
-
-    //private final By FILE_SIZE_QUES = By.id("com.accutime.clocksetup:id/tooltip_file_size");
-    //private final By TIME_INTERVAL_QUES = By.id("com.accutime.clocksetup:id/tooltip_time_interval");
-
-
-//    private final By TEST_MODE_APP = By.xpath("//*[@resource-id=\"com.accutime.clocksetup:id/app_name\"][@text=\"TestMode\"]");
-//    private final By CURRENT_STARTUP_APP = By.id("com.accutime.clocksetup:id/tv_current_startup_application");
-//    private final By CLOCK_SETUP_APP = By.xpath("//*[@resource-id=\"com.accutime.clocksetup:id/app_name\"][@text=\"Clock Setup\"]");
 
     //---------------------------------------------------------------------------------------
     public CSetupTerminalPage(AndroidDriver<MobileElement> driver) {
         super(driver);
     }
     //---------------------------------------------------------------------------------------
-
 
     public CSetupTerminalPage enterTerminalName(String value) {
         ActOn.element(driver, TERMINAL_NAME).click();
@@ -80,14 +74,15 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
     }
 
     public CSetupTerminalPage enterTerminalType() {
-        ActOn.wait(driver, TERMINAL_TYPE).waitForToBeVisible(6);
+        ActOn.wait(driver, TERMINAL_TYPE).waitForToBeVisible(8);
         ActOn.element(driver, TERMINAL_TYPE).click();
-        scrollToElement("Stride");
+        scrollToElement("stride");
+        //TimeUnit.SECONDS.wait(3000);
         LOGGER.debug("Terminal type has been selected");
         return this;
     }
 
-    public CSetupTerminalPage clickToTerminalNameQues()  {
+    public CSetupTerminalPage clickToTerminalNameQues() {
         ActOn.wait(driver, TERMINAL_MAME_QUES).waitForToBeVisible(2);
         ActOn.element(driver, TERMINAL_MAME_QUES).click();
         LOGGER.debug("Clicked to TERMINAL_MAME_QUES");
@@ -115,14 +110,12 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetupTerminalPage selectEnglishLanguage() {
         ActOn.wait(driver, ENGLISH_LANGUAGE).waitForToBeVisible(2);
         ActOn.element(driver, ENGLISH_LANGUAGE).click();
         LOGGER.debug("English language has been selected");
         return this;
     }
-
 
     public CSetupTerminalPage clickToReadersButton() {
         ActOn.wait(driver, READERS).waitForToBeVisible(2);
@@ -131,17 +124,10 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetupTerminalPage clickToDone() {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(2);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
-        return this;
-    }
-
-    public CSetupTerminalPage clickToCancel() {
-        ActOn.element(driver, CANCEL_BUTTON).click();
-        LOGGER.debug("Clicked to Cancel Button");
         return this;
     }
 
@@ -245,7 +231,6 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetupTerminalPage selectLogToHost() {
         ActOn.wait(driver, LOG_TO_HOST).waitForToBeVisible(5);
         ActOn.element(driver, LOG_TO_HOST).click();
@@ -336,5 +321,31 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
 
 }
 
+//-----------------------------------------------------------------
+//public CSetupTerminalPage clickToOkButton() {
+//    if (driver.findElement(By.id("android:id/button1")).isDisplayed()) {
+//        ActOn.element(driver, OK_BUTTON).click();
+//        //clickToOK();
+//    } else {
+//        LOGGER.info("Verified ok button not displayed ");
+//    }
+//    return this;
+//}
+//
+//    public CSetupTerminalPage clickToCancel() {
+//        ActOn.element(driver, CANCEL_BUTTON).click();
+//        LOGGER.debug("Clicked to Cancel Button");
+//        return this;
+//    }
 
 
+//    public CSetupTerminalPage clickToOK() {
+//        ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(10);
+//        ActOn.element(driver, OK_BUTTON).click();
+//        LOGGER.debug("Clicked to OK Button");
+//        return this;
+//    }
+//private final By FILE_SIZE_QUES = By.id("com.accutime.clocksetup:id/tooltip_file_size");
+//private final By TIME_INTERVAL_QUES = By.id("com.accutime.clocksetup:id/tooltip_time_interval");
+//private final By TEST_MODE_APP = By.xpath("//*[@resource-id=\"com.accutime.clocksetup:id/app_name\"][@text=\"TestMode\"]");
+//private final By CURRENT_STARTUP_APP = By.id("com.accutime.clocksetup:id/tv_current_startup_application");

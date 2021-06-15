@@ -1,7 +1,6 @@
 package automation_script.Stride80.clocksetup;
 
 import data_provider.clocksetup.DataProviderClockSetup;
-import listeners.BaseClass;
 import org.testng.annotations.Test;
 import page_objects.clocksetup_Pages.NavigationPageClockSetup;
 import utilities.ReadConfigFiles;
@@ -10,7 +9,7 @@ public class CSetConnHostCellDaemons extends ClockSetup_BaseClass {
 
     @Test(dataProvider = "clockSetupHostCellDaeSettings", dataProviderClass = DataProviderClockSetup.class)
     public void clockSetupWifiConnectivity(String hostUrl, String hostName, String hostPass, String cellProvi, String cellUser,
-    String cellMCC, String mobileServer, String cellProxy, String cellAPN, String cellPass, String cellMNC, String cellPort,
+                                           String cellMCC, String mobileServer, String cellProxy, String cellAPN, String cellPass, String cellMNC, String cellPort,
                                            String restartMessage, String adbTittle, String ipMessage, String ntpServer) throws InterruptedException {
 
         new NavigationPageClockSetup(driver)
@@ -58,7 +57,6 @@ public class CSetConnHostCellDaemons extends ClockSetup_BaseClass {
                 .clickToCellModem()
                 .cellModemEnable()
                 .clickToDone()
-                .verifyRestartMessage(restartMessage)
                 .clickToOK()
                 .clickToDaemons()
                 .adbEnable()
@@ -66,10 +64,8 @@ public class CSetConnHostCellDaemons extends ClockSetup_BaseClass {
                 .clickConnectToADB()
                 .verifyADBConnectPageTittle(adbTittle)
                 .verifyIPAddress(ipMessage)
-                //.clickToDone()
                 .clickToDone()
                 .clickToDone()
-                //.navigateToTimePage()
                 .clickToTime()
                 .selectTimeRegionAsia()
                 .selectAsiaTimeZone()
@@ -79,7 +75,7 @@ public class CSetConnHostCellDaemons extends ClockSetup_BaseClass {
                 .selectMexicoTimeZoneGeneral()
                 .selectTimeRegionAmerica()
                 .selectAmericaTimeZone()
-                //.clickToEnableNTP()
+                .checkAndEnableNTP()
                 .enterNTPServerInformation(ntpServer)
                 .clickToQuesNTPServer()
                 .clickToOKToQues()
@@ -92,9 +88,11 @@ public class CSetConnHostCellDaemons extends ClockSetup_BaseClass {
                 .clickToTime()
                 .clickToEnableNTP()
                 .clickToDone()
-                .clickToDone()
-                .clickToOK();
+                .clickToDone();
 
     }
 
 }
+
+//-----------------------------------------------------
+//.verifyRestartMessage(restartMessage)

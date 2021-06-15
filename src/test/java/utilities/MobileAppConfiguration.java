@@ -12,8 +12,8 @@ public class MobileAppConfiguration {
         caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.1.0");
         caps.setCapability(MobileCapabilityType.DEVICE_NAME, "hcm");
         //caps.setCapability(MobileCapabilityType.UDID, "c2c3a0db");
-        //caps.setCapability(MobileCapabilityType.UDID, "192.168.128.120:3121");
-        caps.setCapability(MobileCapabilityType.UDID, "192.168.1.220:3121");
+        //caps.setCapability(MobileCapabilityType.UDID, "192.168.129.33:3121");
+        //caps.setCapability(MobileCapabilityType.UDID, "192.168.129.66:3121");
         caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Uiautomator2");
     }
 }
