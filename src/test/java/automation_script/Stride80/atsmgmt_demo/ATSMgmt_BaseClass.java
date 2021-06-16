@@ -39,6 +39,7 @@ public class ATSMgmt_BaseClass {
             LOGGER.error("Message is : " + exp.getMessage());
             exp.printStackTrace();
         }
+
     }
 
     @AfterMethod

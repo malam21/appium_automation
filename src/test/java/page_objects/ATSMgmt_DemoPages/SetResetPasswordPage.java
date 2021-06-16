@@ -92,9 +92,10 @@ public class SetResetPasswordPage extends NavigationPage {
             ActOn.element(driver, BACK_BUTTON).click();
             LOGGER.debug("Clicked on BackButton to return to main page");
             TimeUnit.SECONDS.sleep(5);
-            return this;
 
+            return this;
         }
+
     }
 
 

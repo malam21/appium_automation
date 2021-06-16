@@ -31,4 +31,5 @@ public class ValidateResetPasswords extends ATSMgmt_BaseClass {
                     .clickBackButton();
 
         }
+
     }

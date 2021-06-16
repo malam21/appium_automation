@@ -55,6 +55,7 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     private final By HID_PROX_CARD = By.id("com.accutime.testmode:id/hid_prox");
     private final By OS_VERSION = By.id("com.accutime.testmode:id/os_ver");
     private final By OK_BUTTON = By.id("android:id/button1");
+    private final By DONE_BUTTON = By.id("com.accutime.clocksetup:id/btn_done");
 
 
     //*
@@ -441,6 +442,14 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         return this;
     }
 
+
+    public SpeakerLightBarPowerTestPage clickToDone() throws InterruptedException {
+        ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(4);
+        ActOn.element(driver, DONE_BUTTON).click();
+        LOGGER.debug("Clicked to Done Button");
+        TimeUnit.SECONDS.sleep(4);
+        return this;
+    }
 }
 
 

@@ -105,6 +105,7 @@ public class ValidateSetupParameter extends ATSMgmt_BaseClass {
                 .enterFingerCompatible(valueOne)
                 .clickReaderSettings()
                 .validateReaderSettingsMessage(ReaderSettingsMessage)
+
                 .clickBackButton();
 
     }

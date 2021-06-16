@@ -167,7 +167,7 @@ public class SetSetupParameterPage extends NavigationPage {
         } else {
             LOGGER.info("Verified settings message **NOT** matched as expected: Actual Response : " + actualResponse + " Expected Response :" + expectedValue);
             LOGGER.info("Verified ethernet IP address settings not saved successfully");
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(3);
             ElementActions.takeScreenShot();
         }
         return this;
@@ -622,6 +622,7 @@ public class SetSetupParameterPage extends NavigationPage {
         ActOn.element(driver, BACK_BUTTON).click();
         TimeUnit.SECONDS.sleep(5);
         LOGGER.debug("Clicked on BackButton to return to main page");
+
         return this;
     }
 

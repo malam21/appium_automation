@@ -129,7 +129,7 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
     public CSetupTerminalPage clickToDone() throws InterruptedException {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(2);
         ActOn.element(driver, DONE_BUTTON).click();
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(4);
         LOGGER.debug("Clicked to Done Button");
         return this;
     }
@@ -322,7 +322,7 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public CSetupTerminalPage clickToButton() throws InterruptedException {
+    public CSetupTerminalPage clickToOKButton() throws InterruptedException {
         ActOn.element(driver, OK_BUTTON).click();
         LOGGER.debug("Clicked on OK Button");
         TimeUnit.SECONDS.sleep(4);

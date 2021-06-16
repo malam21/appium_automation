@@ -81,13 +81,14 @@ public class DiDoCameraTestPage extends NavigationPageTestMode {
     public DiDoCameraTestPage clickToPassTest() throws InterruptedException {
         ActOn.element(driver, PASS_TEST).click();
         LOGGER.debug("Clicked To Pass Test");
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(4);
         return this;
     }
 
-    public DiDoCameraTestPage clickToFailTest() {
+    public DiDoCameraTestPage clickToFailTest() throws InterruptedException {
         ActOn.element(driver, FAIL_TEST).click();
         LOGGER.debug("Clicked To Fail Test");
+        TimeUnit.SECONDS.sleep(2);
         return this;
     }
 

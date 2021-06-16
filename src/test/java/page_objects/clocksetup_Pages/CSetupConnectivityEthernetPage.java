@@ -135,7 +135,7 @@ public class CSetupConnectivityEthernetPage extends NavigationPageClockSetup {
     public CSetupConnectivityEthernetPage clickToDone() throws InterruptedException {
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(4);
         return this;
     }
 

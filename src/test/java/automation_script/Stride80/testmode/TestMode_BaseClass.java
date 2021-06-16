@@ -37,6 +37,7 @@ public class TestMode_BaseClass {
             System.out.println("Message is : " + exp.getMessage());
             LOGGER.error("Message is : " + exp.getMessage());
             exp.printStackTrace();
+
         }
     }
 

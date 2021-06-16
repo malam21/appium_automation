@@ -115,6 +115,7 @@ public class GetSetUpParameterPage extends NavigationPage {
         ActOn.element(driver, BACK_BUTTON).click();
         LOGGER.debug("Clicked on Back Button");
         TimeUnit.SECONDS.sleep(5);
+
         return this;
     }
 

@@ -3,3 +3,5 @@ logs
 *.iml
 target
 allure-results
+screenshot
+.png

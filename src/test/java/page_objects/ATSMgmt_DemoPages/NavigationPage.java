@@ -39,6 +39,7 @@ public class NavigationPage {
         ActOn.element(driver, SET_SETUP_PARA).click();
         LOGGER.info("User navigated to Set setup parameter page");
         return new SetSetupParameterPage(driver);
+
     }
 
     //Reset Setup Passwords

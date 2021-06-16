@@ -69,7 +69,8 @@ public class ValidateSpeakerLightBarPowerTest extends TestMode_BaseClass {
                 .verifyKeypadAttached(keyPad)
                 .verifyHidProxCard(proxyCard)
                 .verifyBioSensor(bioSensor)
-                .verifyOsVersion(osVersion);
+                .verifyOsVersion(osVersion)
+                .clickToDone();
 
     }
 }

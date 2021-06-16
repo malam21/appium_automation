@@ -39,5 +39,6 @@ public class ValidateKeypadDisplayTouch extends TestMode_BaseClass {
                 .SoundTestMessageDisplayed()
                 .validateSoundMessage(soundMess)
                 .ClickToPass();
+
     }
 }

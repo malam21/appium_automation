@@ -33,6 +33,7 @@ public class ClockSetupConnectivity extends ClockSetup_BaseClass {
                 .clickToOKToQues()
                 .clickToSubnetQues()
                 .clickToOKToQues()
+
                 //.clickToDone()
                 //.verifyRestartMessage(restartMess)
                 //.clickToOK()

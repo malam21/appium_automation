@@ -95,7 +95,7 @@ public class CSetupWifiConnectivityPage extends NavigationPageClockSetup {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(4);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(4);
         return this;
     }
 

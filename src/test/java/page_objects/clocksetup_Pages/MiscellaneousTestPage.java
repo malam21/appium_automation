@@ -74,13 +74,14 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     public MiscellaneousTestPage clickToDone() throws InterruptedException {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(2);
         ActOn.element(driver, DONE_BUTTON).click();
-        LOGGER.debug("Clicked to Done Button");
         TimeUnit.SECONDS.sleep(3);
+        LOGGER.debug("Clicked to Done Button");
         return this;
     }
 
-    public MiscellaneousTestPage clickToCancel() {
+    public MiscellaneousTestPage clickToCancel() throws InterruptedException {
         ActOn.element(driver, CANCEL_BUTTON).click();
+        TimeUnit.SECONDS.sleep(3);
         LOGGER.debug("Clicked to Cancel Button");
         return this;
     }

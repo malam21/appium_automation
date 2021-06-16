@@ -80,7 +80,6 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         return this;
     }
 
-
     public KeypadDisplayTouchTestPage ClickDisplayImage() {
         ActOn.element(driver, DISPLAY_IMAGE).click();
         LOGGER.debug("Clicked to image in the corner of the screen");
@@ -94,11 +93,11 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         return this;
     }
 
-
-    public KeypadDisplayTouchTestPage ClickPassTest() {
+    public KeypadDisplayTouchTestPage ClickPassTest() throws InterruptedException {
         ActOn.element(driver, PASS_TEST).click();
         LOGGER.debug("Clicked on PassTest button");
         LOGGER.info("User navigating to main page");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
@@ -171,12 +170,18 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         return this;
     }
 
-    public KeypadDisplayTouchTestPage ClickToPass() {
+    public KeypadDisplayTouchTestPage ClickToPass() throws InterruptedException {
         ActOn.element(driver, PASS_BUTTON).click();
+        TimeUnit.SECONDS.sleep(4);
         LOGGER.debug("Clicked on PassTest button, Navigated to main page");
         return this;
     }
 }
+
+
+
+
+
 
 
 //---------------------------------------------------------------------------------------

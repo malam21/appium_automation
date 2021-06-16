@@ -21,7 +21,6 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     //-----------------------------------------------------------------------------------------------
 
 
-
     //Element Locator Details
     private final By LOGIN = By.id("com.accutime.clocksetup:id/btn_login");
     private final By ATS_MANU = By.id("com.accutime.clocksetup:id/radio_manufacturing");
@@ -50,6 +49,7 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     //private final By YES = By.id("android:id/button1");
     //*
 
+
     //---------------------------------------------------------------------------------------
     public ClockSetupSetupPage(AndroidDriver<MobileElement> driver) {
         super(driver);
@@ -68,7 +68,6 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
         ActOn.element(driver, ATS_MANU).click();
         ActOn.element(driver, VAR_PASSWORD).setValue(value);
         LOGGER.debug("Password entered successfully");
-
         return this;
     }
 
@@ -103,7 +102,7 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(3);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(4);
         return this;
     }
 

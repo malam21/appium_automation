@@ -47,9 +47,7 @@ public class ClockSetupManufacturing extends ClockSetup_BaseClass {
                 .clickToDone()
                 .clickToDone();
 
-
     }
-
 }
 
 
