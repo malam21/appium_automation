@@ -166,6 +166,7 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
             LOGGER.debug("Clicked To Select Brightness Hundred");
         } else {
             ActOn.element(driver, OK_BUTTON).click();
+            LOGGER.info("Clicked to OK button");
             ActOn.element(driver, BRIGHTNESS_HUNDRED).click();
             LOGGER.info("Clicked to OK displayed ");
         }
@@ -275,7 +276,7 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     }
 
     public SpeakerLightBarPowerTestPage verifyFirstCapturePassed(String expectedValue) throws InterruptedException {
-        LOGGER.info("%%%%%%% TESTER HAS TO BE PRESENT FRONT POF THE LAPTOP. %%%%%%% ");
+        LOGGER.info("%%%%%%% TESTER HAS TO BE PRESENT FRONT OF THE LAPTOP. %%%%%%% ");
         ActOn.wait(driver, CAPTURE_PASS_BUTTON).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, CAPTURE_PASS_BUTTON).getTextValue();
         if (actualResponse.equals(expectedValue)) {

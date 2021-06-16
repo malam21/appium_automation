@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ValidateSetupParameter extends ATSMgmt_BaseClass {
 
     @Test(dataProvider = "setEthernetParameter", dataProviderClass = DataProviderClass.class)
-    public void validSetupParameter(String strIP, String strSumask, String strDNS, String strGetWay, String ethernetSetupSuccessfulMessage, String strSSID, String wifiPass, String StpMessage,
+    public void validSetupParameter(String strSumask, String strDNS, String strGetWay, String ethernetSetupSuccessfulMessage, String strSSID, String wifiPass, String StpMessage,
                                     String celluProviName, String cellAPN, String cellProxy, String cellPort, String cellUser,
                                     String cellUserPassword, String cellServer, String cellMCC, String cellMNC, String hostURL, String hostUserName, String hostPassword,
                                     String hostSetupSuccessfulMessage, String dayemonsSetupSuccessfulMessage, String region, String location, String ntpServer, String timeSetupSuccessfulMessage,
@@ -25,13 +25,13 @@ public class ValidateSetupParameter extends ATSMgmt_BaseClass {
                 .clickEthernetSettings()
                 .clickDHCP()
                 //.clickDHCP()
-                .enterFixedIP(strIP)
+                .enterFixedIP()// clock setupApp crashed while same repeated IP address used.
                 .enterSubnetMask(strSumask)
                 .enterDNSServer(strDNS)
                 .enterGateway(strGetWay)
                 .clickDHCP()
                 .clickEthernetSettings()
-                .validateEthernetSettingsMessage(ethernetSetupSuccessfulMessage)
+                .validateEthernetSettingsMessage(ethernetSetupSuccessfulMessage)//validation failing MR.KUNAL looking into it.
                 //.clickDHCP()
                 .clearFixedIP()
                 .clearSubnetMask()

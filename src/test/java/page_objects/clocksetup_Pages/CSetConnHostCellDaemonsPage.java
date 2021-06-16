@@ -113,6 +113,7 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         ActOn.wait(driver, DONE).waitForToBeVisible(6);
         ActOn.element(driver, DONE).click();
         LOGGER.debug("Clicked to done button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
@@ -195,7 +196,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetConnHostCellDaemonsPage enterCellMNC(String value) {
         ActOn.element(driver, MNC).click();
         ActOn.element(driver, MNC).clear();
@@ -258,18 +258,17 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetConnHostCellDaemonsPage clickToQuesPort() {
         ActOn.element(driver, QUES_PORT).click();
         LOGGER.debug("Clicked to open port question details");
         return this;
     }
 
-
-    public CSetConnHostCellDaemonsPage clickToOK() {
-        ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(10);
+    public CSetConnHostCellDaemonsPage clickToOK() throws InterruptedException {
+        ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(5);
         ActOn.element(driver, OK_BUTTON).click();
         LOGGER.debug("Clicked to OK Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
@@ -328,7 +327,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetConnHostCellDaemonsPage selectTimeRegionAsia() {
         ActOn.wait(driver, TIME_REGION).waitForToBeVisible(15);
         ActOn.element(driver, TIME_REGION).click();
@@ -341,12 +339,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
     private void scrollToElement(String strText) {
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + strText + "\").instance(0))").click();
     }
-
-
-    private void scrollForwardToElement(String strText) {
-        driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(6)).scrollIntoView(new UiSelector().textContains(\"" + strText + "\").instance(0))").click();
-    }
-
 
     public CSetConnHostCellDaemonsPage selectAsiaTimeZone() {
         ActOn.wait(driver, TIME_ZONE).waitForToBeVisible(6);
@@ -364,7 +356,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetConnHostCellDaemonsPage selectIndianTimeZoneMaldives() {
         ActOn.wait(driver, TIME_ZONE).waitForToBeVisible(6);
         ActOn.element(driver, TIME_ZONE).click();
@@ -372,7 +363,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         LOGGER.debug("Indian Time Zone Maldives  has been selected");
         return this;
     }
-
 
     public CSetConnHostCellDaemonsPage selectTimeRegionMexico() {
         ActOn.wait(driver, TIME_REGION).waitForToBeVisible(6);
@@ -382,7 +372,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetConnHostCellDaemonsPage selectMexicoTimeZoneGeneral() {
         ActOn.wait(driver, TIME_ZONE).waitForToBeVisible(6);
         ActOn.element(driver, TIME_ZONE).click();
@@ -391,7 +380,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         return this;
     }
 
-
     public CSetConnHostCellDaemonsPage selectTimeRegionAmerica() {
         ActOn.wait(driver, TIME_REGION).waitForToBeVisible(6);
         ActOn.element(driver, TIME_REGION).click();
@@ -399,7 +387,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         LOGGER.debug("Time Region America has been selected");
         return this;
     }
-
 
     public CSetConnHostCellDaemonsPage selectAmericaTimeZone() throws InterruptedException {
         ActOn.wait(driver, TIME_ZONE).waitForToBeVisible(6);
@@ -420,7 +407,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         LOGGER.debug("NTP server name entered successfully");
         return this;
     }
-
 
     public CSetConnHostCellDaemonsPage clickToQuesNTPServer() {
         ActOn.element(driver, QUES_NTP_SERVER).click();
@@ -446,7 +432,6 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         }
         return this;
     }
-
 
     public CSetConnHostCellDaemonsPage clickToSetSysTime() {
         ActOn.wait(driver, SET_SYS_TIME).waitForToBeVisible(6);
@@ -547,4 +532,7 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
 //        ActOn.element(driver, HIDE_KEY).click();
 //        LOGGER.debug("Clicked to Hide key button");
 //        return this;
+//    }
+//    private void scrollForwardToElement(String strText) {
+//        driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(6)).scrollIntoView(new UiSelector().textContains(\"" + strText + "\").instance(0))").click();
 //    }

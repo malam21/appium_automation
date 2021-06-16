@@ -9,8 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import java.io.IOException;
-
-
+import java.util.concurrent.TimeUnit;
 
 
 public class GetSetUpParameterPage extends NavigationPage {
@@ -31,6 +30,7 @@ public class GetSetUpParameterPage extends NavigationPage {
     private final By TIME_LOCATION_RESPONSE = By.id("com.accutime.atsmgmtdemo:id/response");
     private final By GET_TERMINAL_NAME = By.id("com.accutime.atsmgmtdemo:id/btn_get_terminal_name");
     private final By TERMINAL_NAME_RESPONSE = By.id("com.accutime.atsmgmtdemo:id/response");
+    private final By BACK_BUTTON = By.id("com.accutime.atsmgmtdemo:id/btn_back");
 
 
     //-------------------------------------------------------------------------------------
@@ -110,6 +110,15 @@ public class GetSetUpParameterPage extends NavigationPage {
         LOGGER.debug("validate Terminal Name : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
+
+    public GetSetUpParameterPage clickToBackButton() throws InterruptedException {
+        ActOn.element(driver, BACK_BUTTON).click();
+        LOGGER.debug("Clicked on Back Button");
+        TimeUnit.SECONDS.sleep(5);
+        return this;
+    }
+
+
 }
 
 

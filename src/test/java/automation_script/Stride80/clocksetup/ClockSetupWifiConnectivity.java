@@ -43,6 +43,9 @@ public class ClockSetupWifiConnectivity extends ClockSetup_BaseClass {
                 .clickToDHCPCheckBox()
                 .clickToWifiEnable()
                 .clickToDone()
+                .clickToOK()
+                .clickToDone()
+                .clickToDone()
                 .clickToOK();
 
     }

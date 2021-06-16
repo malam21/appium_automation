@@ -38,7 +38,7 @@ public class SampleThree {
             caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.1.0");
             //caps.setCapability(MobileCapabilityType.DEVICE_NAME, "hcm");
             //caps.setCapability(MobileCapabilityType.DEVICE_NAME, "c2c3a0db");
-            caps.setCapability(MobileCapabilityType.UDID, "192.168.1.237:3121");
+            caps.setCapability(MobileCapabilityType.UDID, "192.168.129.124:3121");
             caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Uiautomator2");
 
 
@@ -100,6 +100,7 @@ public class SampleThree {
             takeScreenShot(driver, "c://test.png");
             //randomNumber();
            System.out.println(""+randomNumber());
+           System.out.println(getRandomIpv4Address());
            driver.findElement(By.id("com.accutime.testmode:id/cb_relay_1")).setValue(""+randomNumber());
     }
 
@@ -130,8 +131,10 @@ public class SampleThree {
     }
 
 
-
-
+    public static String getRandomIpv4Address() {
+        return "192." + "168." + (int) (Math.random() * 255) + "."
+                + (int) (Math.random() * 255);
+    }
 
 
 

@@ -68,7 +68,10 @@ public class ClockSetupTerminal extends ClockSetup_BaseClass {
                 .clickToTriggerQues()
                 .clickToOKQues()
                 .clickToDone()
-                .clickToDone();
+                .clickToDone()
+                .clickToDone()
+                .clickToDone()
+                .clickToButton();
 
     }
 

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 
 public class PullSetupParametersPage extends NavigationPage {
@@ -86,9 +87,10 @@ public class PullSetupParametersPage extends NavigationPage {
         return this;
     }
 
-    public PullSetupParametersPage clickToBackButton() {
+    public PullSetupParametersPage clickToBackButton() throws InterruptedException {
         ActOn.element(driver, BACK_BUTTON).click();
         LOGGER.debug("Clicked on Back Button");
+        TimeUnit.SECONDS.sleep(5);
         return this;
     }
 
@@ -120,12 +122,11 @@ public class PullSetupParametersPage extends NavigationPage {
             Assert.assertTrue(actualResponse.contains(expectedValue), actualResponse + " contains matched " + expectedValue);
             LOGGER.debug("Verified contains match : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
             LOGGER.info("Verified available disk space message displayed as expected");
-            ElementActions.takeScreenShot();
         } else {
             LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
-            LOGGER.info("Verified available disk space message not displayed as expected could be disk space is different ");
-            ElementActions.takeScreenShot();
+            LOGGER.info("Verified available disk space message not displayed as expected could be disk space amount is different ");
         }
+        ElementActions.takeScreenShot();
         return this;
     }
 

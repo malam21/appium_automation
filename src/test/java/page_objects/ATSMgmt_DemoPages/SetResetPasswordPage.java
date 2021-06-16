@@ -9,8 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import java.io.IOException;
-
-
+import java.util.concurrent.TimeUnit;
 
 
 public class SetResetPasswordPage extends NavigationPage {
@@ -89,9 +88,10 @@ public class SetResetPasswordPage extends NavigationPage {
         LOGGER.debug("validate EthernetSettings Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
-        public SetResetPasswordPage clickBackButton() {
+        public SetResetPasswordPage clickBackButton() throws InterruptedException {
             ActOn.element(driver, BACK_BUTTON).click();
             LOGGER.debug("Clicked on BackButton to return to main page");
+            TimeUnit.SECONDS.sleep(5);
             return this;
 
         }

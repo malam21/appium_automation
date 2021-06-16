@@ -37,9 +37,11 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     private final By CURRENT_STARTUP_APP = By.id("com.accutime.clocksetup:id/tv_current_startup_application");
     private final By CLOCK_SETUP_APP = By.xpath("//*[@resource-id=\"com.accutime.clocksetup:id/app_name\"][@text=\"Clock Setup\"]");
 
+    //*
     //private final By SETUP_BUTTON = By.id("com.accutime.clocksetup:id/btn_setup");
     //private final By VAR_ADMIN = By.id("com.accutime.clocksetup:id/radio_var_admin");
     //private final By VAR_PASSWORD = By.id("com.accutime.clocksetup:id/et_password");
+    //*
 
     //---------------------------------------------------------------------------------------
     public MiscellaneousTestPage(AndroidDriver<MobileElement> driver) {
@@ -69,10 +71,11 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public MiscellaneousTestPage clickToDone() {
+    public MiscellaneousTestPage clickToDone() throws InterruptedException {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(2);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
@@ -114,7 +117,7 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     public MiscellaneousTestPage verifyResetMessage(String expectedValue) {
         String actualResponse = ActOn.element(driver, RESET_MESSAGE).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
-        LOGGER.debug("validate reset password message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+        LOGGER.debug("Reset password message displayed as expected: Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
 

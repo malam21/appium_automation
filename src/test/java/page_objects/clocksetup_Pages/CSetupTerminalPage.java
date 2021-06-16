@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class CSetupTerminalPage extends NavigationPageClockSetup {
 
@@ -51,7 +53,7 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
     private final By TIMEOUT = By.id("com.accutime.clocksetup:id/et_tof_timeout");
     private final By TRIG_DIS_QUES = By.id("com.accutime.clocksetup:id/tooltip_tof_trigger_distance");
     private final By TIMEOUT_QUES = By.id("com.accutime.clocksetup:id/tooltip_tof_timeout");
-    //private final By OK_BUTTON = By.id("android:id/button1");
+    private final By OK_BUTTON = By.id("android:id/button1");
     //private final By CANCEL_BUTTON = By.id("com.accutime.clocksetup:id/cancel_button");
 
 
@@ -124,9 +126,10 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public CSetupTerminalPage clickToDone() {
+    public CSetupTerminalPage clickToDone() throws InterruptedException {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(2);
         ActOn.element(driver, DONE_BUTTON).click();
+        TimeUnit.SECONDS.sleep(3);
         LOGGER.debug("Clicked to Done Button");
         return this;
     }
@@ -318,6 +321,14 @@ public class CSetupTerminalPage extends NavigationPageClockSetup {
         LOGGER.debug("TimeOUT Question Mark has been clicked");
         return this;
     }
+
+    public CSetupTerminalPage clickToButton() throws InterruptedException {
+        ActOn.element(driver, OK_BUTTON).click();
+        LOGGER.debug("Clicked on OK Button");
+        TimeUnit.SECONDS.sleep(4);
+        return this;
+    }
+
 
 }
 

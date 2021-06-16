@@ -21,7 +21,7 @@ public class DataProviderClass {
     @DataProvider(name = "setEthernetParameter")
     public Object[][] storeEthernetParameter() {
         return new Object[][]{
-                {"192.168.129.1", "255.255.252.0", "192.168.128.10", "192.168.128.254", "{\"Action\":\"Modify Parameters\",\"Success\":true,\"Message\":\"DHCP - Success; Fixed IP - Success; Subnet Mask - Success; DNS Servers - Success; Gateway - Success; \"}",
+                {"255.255.252.0", "192.168.128.10", "192.168.1.1", "{\"Action\":\"Modify Parameters\",\"Success\":true,\"Message\":\"DHCP - Success; Fixed IP - Success; Subnet Mask - Success; DNS Servers - Success; Gateway - Success; \"}",
                         "ATS", "1a2B3c4D+++", "{\"Action\":\"Modify Parameters\",\"Success\":true,\"Message\":\"Wifi Status - Success; Wifi SSID - Success; Wifi Encryption Key - Success; \"}", "TMobile",
                         "APNNumber", "198.168.122.231", "4567", "John", "ABC123", "Bingo22", "198168122231", "198168122231", "http://www.accu-time.com", "Accu-Admin", "abc123",
                         "{\"Action\":\"Modify Parameters\",\"Success\":true,\"Message\":\"Host URL - Success; Host Username - Success; Host Password - Success; \"}",
@@ -50,7 +50,8 @@ public class DataProviderClass {
                         "{\"Action\":\"Download OS Upgrade\",\"Success\":true,\"Message\":\"Secure OTA Cancelled Successfully\"}", "com.accutime.timecollect",
                         "{\"Action\":\"Authenticate Kiosk Application\",\"Success\":true,\"Message\":\"Authenticate Kiosk Application : Success\"}",
                         "{\"Action\":\"Deauthenticate Kiosk Application\",\"Success\":true,\"Message\":\"Deauthenticate Kiosk Application : Success\"}",
-                        "{\"Action\":\"Reset Kiosk Authentications\",\"Success\":true,\"Message\":\"Reset Kiosk Authentications : Success\"}"}};
+                        "{\"Action\":\"Reset Kiosk Authentications\",\"Success\":true,\"Message\":\"Reset Kiosk Authentications : Success\"}",
+                        "http://192.168.1.11/test.apk"}};
     }
 
     @DataProvider(name = "PullSetupParameters")

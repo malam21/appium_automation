@@ -13,7 +13,7 @@ public class ValidateResetPasswords extends ATSMgmt_BaseClass {
 
         @Test(dataProvider = "setResetPassword", dataProviderClass = DataProviderClass.class)
         public void validResetSetupPassword (String newEUPass, String newEndUserPass, String PassReErrorMess, String newVarCorrectPass, String newEndUserCorrectPass,
-        String PassResetSuccessfulMessage) throws IOException {
+        String PassResetSuccessfulMessage) throws IOException, InterruptedException {
 
             new NavigationPage(driver)
                     .navigateToResetSetupPasswordPage()

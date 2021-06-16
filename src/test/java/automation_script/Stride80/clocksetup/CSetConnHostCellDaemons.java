@@ -88,7 +88,8 @@ public class CSetConnHostCellDaemons extends ClockSetup_BaseClass {
                 .clickToTime()
                 .clickToEnableNTP()
                 .clickToDone()
-                .clickToDone();
+                .clickToDone()
+                .clickToOK();
 
     }
 

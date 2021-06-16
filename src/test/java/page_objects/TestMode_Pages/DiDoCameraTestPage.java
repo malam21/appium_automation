@@ -1,6 +1,7 @@
 package page_objects.TestMode_Pages;
 
 import command_providers.ActOn;
+import command_providers.ElementActions;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class DiDoCameraTestPage extends NavigationPageTestMode {
@@ -76,9 +78,10 @@ public class DiDoCameraTestPage extends NavigationPageTestMode {
         return this;
     }
 
-    public DiDoCameraTestPage clickToPassTest() {
+    public DiDoCameraTestPage clickToPassTest() throws InterruptedException {
         ActOn.element(driver, PASS_TEST).click();
         LOGGER.debug("Clicked To Pass Test");
+        TimeUnit.SECONDS.sleep(5);
         return this;
     }
 
@@ -95,7 +98,7 @@ public class DiDoCameraTestPage extends NavigationPageTestMode {
         return this;
     }
 
-    public DiDoCameraTestPage validateCamPageMessage(String expectedValue) throws InterruptedException {
+    public DiDoCameraTestPage validateCamPageMessage(String expectedValue) throws InterruptedException, IOException {
         LOGGER.info("******Validating camera screen message.");
         //ActOn.wait(driver, NEAREST_OBJECT).waitForToBeVisible(5);
         String actualResponse = ActOn.element(driver, CAM_TEST_SCR_MSG).getTextValue();
@@ -104,6 +107,7 @@ public class DiDoCameraTestPage extends NavigationPageTestMode {
             LOGGER.info("Verified camera hardware attached and camera test is possible for this device");
             TimeUnit.SECONDS.sleep(5);
             clickToCapture();
+            ElementActions.takeScreenShot();
             TimeUnit.SECONDS.sleep(5);
             clickToPassTest();
 
@@ -111,7 +115,6 @@ public class DiDoCameraTestPage extends NavigationPageTestMode {
             LOGGER.info("Verified that camera hardware not attached : " + actualResponse + " Expected Response :" + expectedValue);
             LOGGER.info("Verified that camera hardware not attached and camera test is not possible for this device");
             clickToFailTest();
-
         }
         return this;
     }
@@ -126,7 +129,6 @@ public class DiDoCameraTestPage extends NavigationPageTestMode {
         TimeUnit.SECONDS.sleep(3);
         return this;
     }
-
 
 }
 

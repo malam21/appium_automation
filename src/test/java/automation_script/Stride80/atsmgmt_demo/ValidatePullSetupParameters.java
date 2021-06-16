@@ -21,7 +21,7 @@ public class ValidatePullSetupParameters extends ATSMgmt_BaseClass {
                 .enterServerUserName(serUserName)
                 .enterServerPass(serverPass)
                 //.clickToRequestParameters()
-                //.verifyReqParaMessage(reqParaMess)//TODO ADB disconnecting,I have sent an email to Kunal and David
+                //.verifyReqParaMessage(reqParaMess)//ADB disconnecting,I have sent an email to Kunal and David
                 .clickToBackButton()
                 .clickToGetFreeDiskSpace()
                 .enterVARPassword(ReadConfigFiles.getPropertyValue("Password"))

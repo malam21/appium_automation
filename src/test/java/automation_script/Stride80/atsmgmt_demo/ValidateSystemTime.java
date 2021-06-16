@@ -9,7 +9,7 @@ public class ValidateSystemTime extends ATSMgmt_BaseClass {
 
     @Test(dataProvider = "setSystemTime", dataProviderClass = DataProviderClass.class)
     public void ValidateSystemTime(String wrongSysTime, String zoneChicago, String sysTimeMessage, String zoneNewyork, String correctSysTime, String corrForSysTime, String baseUrl, String downLoading,
-                                   String dlCancelMess, String pacName, String authPackNameMessage, String deauthPackNameMessage, String resetDefMess) throws InterruptedException {
+                                   String dlCancelMess, String pacName, String authPackNameMessage, String deauthPackNameMessage, String resetDefMess, String appPath) throws InterruptedException {
 
         new NavigationPage(driver)
                 .navigateToSetSystemTimePage()
@@ -21,8 +21,10 @@ public class ValidateSystemTime extends ATSMgmt_BaseClass {
                 .enterSystemTime(correctSysTime)
                 .clickSetTime()
                 .enterTimeZone(zoneNewyork)
- //               .validateCorrectTimeFormatMessage(corrForSysTime)
+                .clickSetTime()
+                .validateCorrectTimeFormatMessage(corrForSysTime)
                 .clickBackButton()
+
                 .navigateToUpdateOSPage()
                 .enterVARPassword(ReadConfigFiles.getPropertyValue("Password"))
                 .enterBaseURL(baseUrl)
@@ -41,6 +43,12 @@ public class ValidateSystemTime extends ATSMgmt_BaseClass {
                 .validateDeAuthPacNameMessage(deauthPackNameMessage)
                 .clickToResetDefaults()
                 .validateResetDefaultMessage(resetDefMess)
+                .clickBackButton()
+
+                .clickToUpdateKioskApp()
+                .enterVARPassword(ReadConfigFiles.getPropertyValue("Password"))
+                .enterKioskAppAPKPath(appPath)
+                .clickToDownloadApp()
                 .clickBackButton();
 
     }

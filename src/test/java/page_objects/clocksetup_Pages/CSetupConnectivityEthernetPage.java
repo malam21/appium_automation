@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class CSetupConnectivityEthernetPage extends NavigationPageClockSetup {
 
@@ -131,16 +132,18 @@ public class CSetupConnectivityEthernetPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public CSetupConnectivityEthernetPage clickToDone() {
+    public CSetupConnectivityEthernetPage clickToDone() throws InterruptedException {
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
 
-    public CSetupConnectivityEthernetPage clickToOK() {
+    public CSetupConnectivityEthernetPage clickToOK() throws InterruptedException {
         ActOn.element(driver, OK_BUTTON).click();
         LOGGER.debug("Clicked to OK Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 

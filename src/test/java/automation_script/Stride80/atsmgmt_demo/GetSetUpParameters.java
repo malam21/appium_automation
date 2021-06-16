@@ -11,7 +11,7 @@ import java.io.IOException;
 public class GetSetUpParameters extends ATSMgmt_BaseClass {
 
     @Test (dataProvider = "setUpParameter", dataProviderClass = DataProviderClass.class)
-    public void validSetupParameter(String SerialNumber, String RegionalInformation, String TimeLocation, String TerminalName) throws IOException {
+    public void validSetupParameter(String SerialNumber, String RegionalInformation, String TimeLocation, String TerminalName) throws IOException, InterruptedException {
 
         new NavigationPage(driver)
                 .navigateToGetSetUpParameterPage()
@@ -23,7 +23,8 @@ public class GetSetUpParameters extends ATSMgmt_BaseClass {
                 .ClickGetTimeLocation()
                 .validateTimeLocation(TimeLocation)
                 .ClickGetTerminalName()
-                .validateTerminalName(TerminalName);
+                .validateTerminalName(TerminalName)
+                .clickToBackButton();
     }
 }
 

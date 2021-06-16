@@ -21,6 +21,7 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     //-----------------------------------------------------------------------------------------------
 
 
+
     //Element Locator Details
     private final By LOGIN = By.id("com.accutime.clocksetup:id/btn_login");
     private final By ATS_MANU = By.id("com.accutime.clocksetup:id/radio_manufacturing");
@@ -38,15 +39,16 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     private final By MAC_QUES = By.id("com.accutime.clocksetup:id/tooltip_mac_number");
     private final By SERIAL_QUES = By.id("com.accutime.clocksetup:id/tooltip_serial_number");
     private final By LINE_QUES = By.id("com.accutime.clocksetup:id/tooltip_line_number");
-    //private final By REBOOT = By.id("com.accutime.clocksetup:id/btn_reboot");
-    //private final By NO = By.id("android:id/button2");
-    //private final By YES = By.id("android:id/button1");
     private final By SETUP_SERVER = By.id("com.accutime.clocksetup:id/btn_setup_server");
     private final By SERVER_URL = By.id("com.accutime.clocksetup:id/et_setup_server_url");
     private final By SERVER_USER_NAME = By.id("com.accutime.clocksetup:id/et_setup_server_username");
     private final By SERVER_PASSWORD = By.id("com.accutime.clocksetup:id/et_setup_server_password");
     private final By PULL_SETUP_PARA = By.id("com.accutime.clocksetup:id/btn_setup_server");
-
+    //*
+    //private final By REBOOT = By.id("com.accutime.clocksetup:id/btn_reboot");
+    //private final By NO = By.id("android:id/button2");
+    //private final By YES = By.id("android:id/button1");
+    //*
 
     //---------------------------------------------------------------------------------------
     public ClockSetupSetupPage(AndroidDriver<MobileElement> driver) {
@@ -65,14 +67,15 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     public ClockSetupSetupPage enterPassword(String value) {
         ActOn.element(driver, ATS_MANU).click();
         ActOn.element(driver, VAR_PASSWORD).setValue(value);
-        LOGGER.debug("Entered Password successfully");
+        LOGGER.debug("Password entered successfully");
+
         return this;
     }
 
     public ClockSetupSetupPage validatePassErrorMessage(String expectedValue) {
         String actualResponse = ActOn.element(driver, PASS_ERROR).getTextValue();
         Assert.assertEquals(actualResponse, expectedValue);
-        LOGGER.debug("validate password error : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+        LOGGER.debug("validate password error message: Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         return this;
     }
 
@@ -96,10 +99,11 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public ClockSetupSetupPage clickToDone() {
+    public ClockSetupSetupPage clickToDone() throws InterruptedException {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(3);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
@@ -180,7 +184,6 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     public ClockSetupSetupPage enterServerURL(String value) {
         ActOn.element(driver, SERVER_URL).click();
         ActOn.element(driver, SERVER_URL).clear();
-        //ActOn.element(driver, SERVER_URL).click();
         ActOn.element(driver, SERVER_URL).setValue(value);
         LOGGER.debug("ServerURL entered successfully");
 
@@ -190,24 +193,20 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     public ClockSetupSetupPage enterServerUserName(String value) {
         ActOn.element(driver, SERVER_USER_NAME).click();
         ActOn.element(driver, SERVER_USER_NAME).clear();
-        //ActOn.element(driver, SERVER_USER_NAME).click();
         ActOn.element(driver, SERVER_USER_NAME).setValue(value);
         LOGGER.debug("Server user name entered successfully");
         driver.hideKeyboard();
         return this;
     }
 
-
     public ClockSetupSetupPage enterServerPassword(String value) {
         ActOn.element(driver, SERVER_PASSWORD).click();
         ActOn.element(driver, SERVER_PASSWORD).clear();
-        //ActOn.element(driver, SERVER_PASSWORD).click();
         ActOn.element(driver, SERVER_PASSWORD).setValue(value);
         LOGGER.debug("Server password entered successfully");
         driver.hideKeyboard();
         return this;
     }
-
 
     public ClockSetupSetupPage clickToPullSetUpParameter() throws IOException, InterruptedException {
         ActOn.element(driver, PULL_SETUP_PARA).click();
@@ -217,8 +216,14 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
         return this;
     }
 
-
 }
+
+
+
+
+
+
+
 
 //-------------------------------------------------------------------------------
 

@@ -40,7 +40,8 @@ public class ClockSetupConnectivity extends ClockSetup_BaseClass {
                 .clickToDHCPCheckBox()
                 .clickToDone()
                 .verifyRestartMessage(restartMess)
-                .clickToOK();
+                .clickToOK()
+                .clickToDone();
 
     }
 }

@@ -4,10 +4,12 @@ import data_provider.testmode.DataProviderClassTestMode;
 import org.testng.annotations.Test;
 import page_objects.TestMode_Pages.NavigationPageTestMode;
 
+import java.io.IOException;
+
 public class ValidateDiDoCamera extends TestMode_BaseClass {
 
     @Test(dataProvider = "didoCameraTestPageData", dataProviderClass = DataProviderClassTestMode.class)
-    public void validateDiDoCamera(String scrMessage) throws InterruptedException {
+    public void validateDiDoCamera(String scrMessage) throws InterruptedException, IOException {
 
         new NavigationPageTestMode(driver)
                 .navigateToCameraTestPage()

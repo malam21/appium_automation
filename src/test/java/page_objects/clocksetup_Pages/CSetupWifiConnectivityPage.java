@@ -91,36 +91,38 @@ public class CSetupWifiConnectivityPage extends NavigationPageClockSetup {
         return this;
     }
 
-    public CSetupWifiConnectivityPage clickToDone() {
+    public CSetupWifiConnectivityPage clickToDone() throws InterruptedException {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(4);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
-    public CSetupWifiConnectivityPage clickToOK() {
+    public CSetupWifiConnectivityPage clickToOK() throws InterruptedException {
         ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(10);
         ActOn.element(driver, OK_BUTTON).click();
         LOGGER.debug("Clicked to OK Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
     public CSetupWifiConnectivityPage verifyNearestObject(String expectedValue) throws InterruptedException {
-        LOGGER.info("******Validating if available network is not present ");
+        LOGGER.info("******Validating if device is network connected wifi connection not working ");
         //ActOn.wait(driver, NEAREST_OBJECT).waitForToBeVisible(5);
         ActOn.wait(driver, WiFI_MESSAGE).waitForToBeVisible(50);
         String actualResponse = ActOn.element(driver, WiFI_MESSAGE).getTextValue();
         if (actualResponse.equals(expectedValue)) {
-            Assert.assertTrue(actualResponse.contains(expectedValue), actualResponse + " doesn't contains " + expectedValue);
-            LOGGER.debug("Verified that if device is not configured for wifi settings : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
+            Assert.assertTrue(true, actualResponse + " contains match" + expectedValue);
+            //Assert.assertTrue(actualResponse.contains(expectedValue), actualResponse + " contains match" + expectedValue);
+            LOGGER.debug("Verified that device is not configured for wifi settings : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
             TimeUnit.SECONDS.sleep(2);
-            clickToOK();
         } else {
             LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
-            LOGGER.info("Verified wifi connection not available");
+            LOGGER.info("Verified wifi connection setup is not working");
             TimeUnit.SECONDS.sleep(3);
-            clickToOK();
         }
+        clickToOK();
         return this;
     }
 
