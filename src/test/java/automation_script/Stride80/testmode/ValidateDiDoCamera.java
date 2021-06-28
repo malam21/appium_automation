@@ -30,5 +30,6 @@ public class ValidateDiDoCamera extends TestMode_BaseClass {
                 .ClickToReadOutputs()
                 .ClickToReadInputs()
                 .clickToPassTest();
+
     }
 }

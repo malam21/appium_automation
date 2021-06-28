@@ -37,15 +37,16 @@ public class TestMode_BaseClass {
             System.out.println("Message is : " + exp.getMessage());
             LOGGER.error("Message is : " + exp.getMessage());
             exp.printStackTrace();
-
         }
     }
 
     @AfterMethod
     public void closeBrowser() {
-        // driver.manage().deleteAllCookies();
+
+         //driver.manage().deleteAllCookies();
         //ActOn.browser(driver).closeBrowser();
-        driver.quit();
+        //driver.quit();
+        //*
         LOGGER.info(endTestCase);
     }
 }

@@ -1,6 +1,7 @@
 package page_objects.TestMode_Pages;
 
 import command_providers.ActOn;
+import command_providers.ElementActions;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import utilities.ReadConfigFiles;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -55,7 +57,7 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     private final By HID_PROX_CARD = By.id("com.accutime.testmode:id/hid_prox");
     private final By OS_VERSION = By.id("com.accutime.testmode:id/os_ver");
     private final By OK_BUTTON = By.id("android:id/button1");
-    private final By DONE_BUTTON = By.id("com.accutime.clocksetup:id/btn_done");
+    private final By DONE_BUTTON = By.id("com.accutime.testmode:id/btn_cancel");
 
 
     //*
@@ -328,12 +330,15 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         TimeUnit.SECONDS.sleep(2);
         ActOn.element(driver, VERIFY_FINGER_BUTTON).click();
         LOGGER.debug("Verify scanned Fingerprint button Clicked");
-        TimeUnit.SECONDS.sleep(4);
+        //TimeUnit.SECONDS.sleep(4);
         LOGGER.info("%%%%%%% PUT YOUR FIRST FINGER NOW FOR SECOND TIME THIRD SCAN. %%%%%%% ");
         LOGGER.info("%%%%%%% PUT YOUR FIRST FINGER NOW FOR SECOND TIME THIRD SCAN. %%%%%%% ");
         //TimeUnit.SECONDS.sleep(5);
         return this;
     }
+
+
+
 
     public SpeakerLightBarPowerTestPage verifyScannedFingerMessage(String expectedValue) throws InterruptedException {
         ActOn.wait(driver, FINGER_PRINT_MESSAGE).waitForToBeVisible(5);
@@ -346,10 +351,15 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
     }
 
 
-    public SpeakerLightBarPowerTestPage compareSysTimeVSRtcTime() {
+
+
+
+
+    public SpeakerLightBarPowerTestPage compareSysTimeVSRtcTime()throws IOException {
 
         String systemTime = ActOn.element(driver, SYSTEM_TIME).getTextValue();
         String rtcTime = ActOn.element(driver, RTC_TIME).getTextValue();
+        ElementActions.takeScreenShot();
         LOGGER.debug("System Time is " + systemTime);
         LOGGER.debug("RTC Time is " + rtcTime);
         //String SystemTime = "SystemTime:15:41:11";
@@ -442,12 +452,11 @@ public class SpeakerLightBarPowerTestPage extends NavigationPageTestMode {
         return this;
     }
 
-
     public SpeakerLightBarPowerTestPage clickToDone() throws InterruptedException {
-        ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(4);
+        ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(2);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
-        TimeUnit.SECONDS.sleep(4);
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 }

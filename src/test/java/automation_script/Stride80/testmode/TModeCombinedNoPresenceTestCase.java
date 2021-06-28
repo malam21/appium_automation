@@ -6,15 +6,33 @@ import page_objects.TestMode_Pages.NavigationPageTestMode;
 
 import java.io.IOException;
 
+public class TModeCombinedNoPresenceTestCase extends TestMode_BaseClass {
 
-public class ValidateSpeakerLightBarPowerTest extends TestMode_BaseClass {
-
-    @Test(dataProvider = "speakerLightBarPowerTest", dataProviderClass = DataProviderClassTestMode.class)
-    public void validateSpeakerLightBarPowerTest(String noBatStatMessage, String finPriMesg, String failedMessage, String scaFingMessage, String firScaPass,
-                                                 String failFinger, String stayFar, String stayClose, String serialNumber, String keyPad, String proxyCard,
-                                                 String bioSensor, String osVersion) throws IOException,InterruptedException {
+    @Test(dataProvider = "CombinedNoPresenceTestCaseData", dataProviderClass = DataProviderClassTestMode.class)
+    public void validateCombinedNoPresenceTestCase(String disPlayMess, String soundMess, String noBatStatMessage, String stayFar,
+                                                   String serialNumber, String keyPad, String proxyCard, String bioSensor, String osVersion) throws InterruptedException, IOException {
 
         new NavigationPageTestMode(driver)
+                .navigateToDisplayTestPage()
+                .ClickDisplayImage()
+                .ClickDisplayImage()
+                .ClickDisplayImage()
+                .ClickDisplayImage()
+                .validateDisplayMessage(disPlayMess)
+                .ClickPassTest()
+                .navigateToTouchTestPage()
+                .ClickLeftCorner()
+                .ClickRightCorner()
+                .ClickBottomLeftCorner()
+                .ClickBottomRightCorner()
+                .navigateToSoundTestPage()
+                .ClickToRecord()
+                .ClickToStopRecord()
+                .ClickToPlay()
+                .ClickToStopPlay()
+                .SoundTestMessageDisplayed()
+                .validateSoundMessage(soundMess)
+                .ClickToPass()
                 .navigateToSpeakerTestPage()
                 .clickToPlaySpeaker()
                 .clickToPassSpeakerTest()
@@ -47,31 +65,35 @@ public class ValidateSpeakerLightBarPowerTest extends TestMode_BaseClass {
                 .navigateToPowerManagementPage()
                 .verifyNoBatteryStatusMessage(noBatStatMessage)
                 .selectPassTest()
-                .navigateToBiometricPage()
-                .verifyFingerButtonStatus()
-                .selectCaptureFingerButton()
-                .verifyFingerPrintMessage(finPriMesg)
-                .verifyCaptureFailed(failedMessage)
-                .verifyFingerButtonStatus()
-                .scanFingerForFirstTime()
-                .verifyFirstCapturePassed(firScaPass)
-                //.scanWrongFinger()
-                //.verifySecondScanFailed(failFinger)
-                //.scanSameFingerForSecondTime()
-                //.verifyScannedFingerMessage(scaFingMessage)
                 .navigateToRTCTestPage()
                 .compareSysTimeVSRtcTime()
                 .selectPassTest()
+                .navigateToDiDoPage()
+                .clickToChannelOneChkBox()
+                .ClickToSetOutput()
+                .ClickToReadOutputs()
+                .ClickToReadInputs()
+                .clickToChannelTwoChkBox()
+                .ClickToSetOutput()
+                .ClickToReadInputs()
+                .clickToPassTest()
+                .navigateToDiDoPage()
+                .clickToChannelOneChkBox()
+                .clickToChannelTwoChkBox()
+                .ClickToSetOutput()
+                .ClickToReadOutputs()
+                .ClickToReadInputs()
+                .clickToPassTest()
                 .navigateToPresenceSensorTestPage()
                 .verifyOutOfTheRange(stayFar)
-                .navigateToPresenceSensorTestPage()
-                .verifyNearestObject(stayClose)
                 .navigateToAboutClockPage()
                 .verifySerialNumber(serialNumber)
                 .verifyKeypadAttached(keyPad)
                 .verifyHidProxCard(proxyCard)
                 .verifyBioSensor(bioSensor)
-                .verifyOsVersion(osVersion);
+                .verifyOsVersion(osVersion)
+                .clickToDone();
 
     }
 }
+

@@ -5,11 +5,13 @@ import org.testng.annotations.Test;
 import page_objects.ATSMgmt_DemoPages.NavigationPage;
 import utilities.ReadConfigFiles;
 
+import java.io.IOException;
+
 public class ValidateSystemTime extends ATSMgmt_BaseClass {
 
     @Test(dataProvider = "setSystemTime", dataProviderClass = DataProviderClass.class)
     public void ValidateSystemTime(String wrongSysTime, String zoneChicago, String sysTimeMessage, String zoneNewyork, String correctSysTime, String corrForSysTime, String baseUrl, String downLoading,
-                                   String dlCancelMess, String pacName, String authPackNameMessage, String deauthPackNameMessage, String resetDefMess, String appPath) throws InterruptedException {
+                                   String dlCancelMess, String pacName, String authPackNameMessage, String deauthPackNameMessage, String resetDefMess, String appPath) throws InterruptedException, IOException {
 
         new NavigationPage(driver)
                 .navigateToSetSystemTimePage()
@@ -52,5 +54,4 @@ public class ValidateSystemTime extends ATSMgmt_BaseClass {
                 .clickBackButton();
 
     }
-
 }

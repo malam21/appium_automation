@@ -74,14 +74,13 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
     public MiscellaneousTestPage clickToDone() throws InterruptedException {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(2);
         ActOn.element(driver, DONE_BUTTON).click();
-        TimeUnit.SECONDS.sleep(3);
         LOGGER.debug("Clicked to Done Button");
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
-    public MiscellaneousTestPage clickToCancel() throws InterruptedException {
+    public MiscellaneousTestPage clickToCancel() {
         ActOn.element(driver, CANCEL_BUTTON).click();
-        TimeUnit.SECONDS.sleep(3);
         LOGGER.debug("Clicked to Cancel Button");
         return this;
     }
@@ -122,11 +121,18 @@ public class MiscellaneousTestPage extends NavigationPageClockSetup {
         return this;
     }
 
+
     public MiscellaneousTestPage clickToOKButton() {
-        ActOn.element(driver, OK_BUTTON).click();
-        LOGGER.debug("OK button has been clicked");
+        if (driver.findElement(By.id("android:id/button1")).isDisplayed()){
+            ActOn.element(driver, OK_BUTTON).click();
+            LOGGER.info("Ok button not displayed");
+        } else {
+            LOGGER.info("Clicked on Ok button");
+        }
         return this;
     }
+
+
 
     public MiscellaneousTestPage clickToLogin() throws InterruptedException {
         ActOn.element(driver, LOGIN).click();

@@ -31,4 +31,25 @@ public class DataProviderClassTestMode {
         };
     }
 
+    //Validate Combined No Presence Test Cases
+    @DataProvider(name = "CombinedNoPresenceTestCaseData")
+    public Object[][] storeCombinedNoPresenceTestCaseData() {
+        return new Object[][]{
+                {"Display Test - Done", "Sound should record and play back audible and clear.", "Currently on Battery : False",
+                 "Object out of range.", "Serial Number : 2019061", "Keypad : Yes","Hid Prox card : Yes", "Bio Sensor : Lumidigm EM300", "OS Ver : A3-03.15-31be9a9"}
+        };
+    }
+
+    //Validate Combined Presence Test Cases
+    @DataProvider(name = "CombinedPresenceTestCaseData")
+    public Object[][] storeCombinedPresenceTestCaseData() {
+        return new Object[][]{
+                {"Does this clock have a physical keypad?", "If keypad is available, press corresponding keys to highlight boxes.", "Place a finger on fingerprint scanner. Remove finger when capture is complete.",
+                 "Capture : Failed", "Capture : Passed", "Nearest object", "Camera preview should show and white light at the top of the screen should be on."}
+        };
+    }
+
+
+
+
 }

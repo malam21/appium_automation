@@ -153,8 +153,8 @@ public class SetSetupParameterPage extends NavigationPage {
         ActOn.element(driver, ETHERNET_SETTINGS).click();
         LOGGER.debug("Clicked on EthernetSettings Link");
         return this;
-
     }
+
 
     public SetSetupParameterPage validateEthernetSettingsMessage(String expectedValue) throws InterruptedException, IOException {
         LOGGER.info("******Validating camera screen message.");
@@ -167,11 +167,12 @@ public class SetSetupParameterPage extends NavigationPage {
         } else {
             LOGGER.info("Verified settings message **NOT** matched as expected: Actual Response : " + actualResponse + " Expected Response :" + expectedValue);
             LOGGER.info("Verified ethernet IP address settings not saved successfully");
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(2);
             ElementActions.takeScreenShot();
         }
         return this;
     }
+
 
     public SetSetupParameterPage clearFixedIP() {
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollBackward()");
@@ -470,9 +471,10 @@ public class SetSetupParameterPage extends NavigationPage {
         return this;
     }
 
-    public SetSetupParameterPage clickTimeSettings() {
+    public SetSetupParameterPage clickTimeSettings() throws IOException {
         driver.findElementByAndroidUIAutomator("new UiScrollable (new UiSelector().scrollable(true).instance(0)).scrollForward()");
         ActOn.element(driver, TIME_SETTINGS).click();
+        ElementActions.takeScreenShot();
         LOGGER.debug("Clicked on Set Time Settings");
         return this;
     }
@@ -622,7 +624,6 @@ public class SetSetupParameterPage extends NavigationPage {
         ActOn.element(driver, BACK_BUTTON).click();
         TimeUnit.SECONDS.sleep(5);
         LOGGER.debug("Clicked on BackButton to return to main page");
-
         return this;
     }
 

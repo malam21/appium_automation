@@ -28,7 +28,6 @@ public class ElementActions {
     public ElementActions(WebDriver driver, By locator) {
         this.driver = driver;
         this.locator = locator;
-
     }
 
     public WebElement getElement() {
@@ -59,7 +58,6 @@ public class ElementActions {
         getElement().clear();
         return this;
     }
-
 
     public ElementActions displayed() {
         getElement().isDisplayed();

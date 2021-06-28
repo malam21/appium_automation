@@ -113,7 +113,7 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         ActOn.wait(driver, DONE).waitForToBeVisible(6);
         ActOn.element(driver, DONE).click();
         LOGGER.debug("Clicked to done button");
-        TimeUnit.SECONDS.sleep(4);
+        TimeUnit.SECONDS.sleep(5);
         return this;
     }
 
@@ -268,7 +268,7 @@ public class CSetConnHostCellDaemonsPage extends NavigationPageClockSetup {
         ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(5);
         ActOn.element(driver, OK_BUTTON).click();
         LOGGER.debug("Clicked to OK Button");
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(4);
         return this;
     }
 

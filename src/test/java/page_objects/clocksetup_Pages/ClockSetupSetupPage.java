@@ -49,7 +49,6 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
     //private final By YES = By.id("android:id/button1");
     //*
 
-
     //---------------------------------------------------------------------------------------
     public ClockSetupSetupPage(AndroidDriver<MobileElement> driver) {
         super(driver);
@@ -102,7 +101,7 @@ public class ClockSetupSetupPage extends NavigationPageClockSetup {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(3);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
-        TimeUnit.SECONDS.sleep(4);
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 

@@ -1,6 +1,7 @@
 package page_objects.ATSMgmt_DemoPages;
 
 import command_providers.ActOn;
+import command_providers.ElementActions;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -160,7 +162,6 @@ public class SetSystemTimePage extends NavigationPage {
         ActOn.element(driver, BACK_BUTTON).click();
         LOGGER.debug("Clicked on Back Button");
         TimeUnit.SECONDS.sleep(5);
-
         return this;
     }
 
@@ -180,13 +181,14 @@ public class SetSystemTimePage extends NavigationPage {
     }
 
 
-    public SetSystemTimePage clickToDownloadOS() {
+    public SetSystemTimePage clickToDownloadOS()  {
         ActOn.element(driver, DL_OS_UPDATE).click();
         LOGGER.debug("Clicked on download OS Button");
+        //TimeUnit.SECONDS.sleep(6);
         return this;
     }
 
-    public SetSystemTimePage validateDownloadingMessage(String expectedValue) throws InterruptedException {
+    public SetSystemTimePage validateDownloadingMessage(String expectedValue) throws InterruptedException, IOException {
         ActOn.wait(driver, DOWNLOAD_MESSAGE).waitForToBeVisible(6);
         TimeUnit.SECONDS.sleep(5);
         LOGGER.info("******Validating download started message");
@@ -194,12 +196,13 @@ public class SetSystemTimePage extends NavigationPage {
         if (actualResponse.contains(expectedValue)) {
             Assert.assertTrue(actualResponse.contains(expectedValue), actualResponse + " contains matched " + expectedValue);
             LOGGER.debug("Verified contains match : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
-            LOGGER.info("Verified download has started with 0% percentage");
+            LOGGER.info("Verified download has not started and percentage value is not more than 0% percentage");
         } else {
             TimeUnit.SECONDS.sleep(2);
             LOGGER.info("Actual Response is : " + actualResponse + " Expected Response :" + expectedValue);
-            LOGGER.info("Verified download has started and downloaded more than 0%  percentage");
+            LOGGER.info("Verified download has started and downloaded percentage is more than 0%");
         }
+        ElementActions.takeScreenShot();
         return this;
     }
 

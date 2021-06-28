@@ -76,9 +76,10 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         Assert.assertEquals(actualResponse, expectedValue);
         LOGGER.debug("validate Display done Message : Actual Response :" + actualResponse + " Expected Response :" + expectedValue);
         LOGGER.info("Press some physical button in the keypad");
-        TimeUnit.SECONDS.sleep(6);
+        TimeUnit.SECONDS.sleep(20);
         return this;
     }
+
 
     public KeypadDisplayTouchTestPage ClickDisplayImage() {
         ActOn.element(driver, DISPLAY_IMAGE).click();
@@ -93,11 +94,11 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         return this;
     }
 
-    public KeypadDisplayTouchTestPage ClickPassTest() throws InterruptedException {
+
+    public KeypadDisplayTouchTestPage ClickPassTest() {
         ActOn.element(driver, PASS_TEST).click();
         LOGGER.debug("Clicked on PassTest button");
         LOGGER.info("User navigating to main page");
-        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
@@ -170,18 +171,12 @@ public class KeypadDisplayTouchTestPage extends NavigationPageTestMode {
         return this;
     }
 
-    public KeypadDisplayTouchTestPage ClickToPass() throws InterruptedException {
+    public KeypadDisplayTouchTestPage ClickToPass() {
         ActOn.element(driver, PASS_BUTTON).click();
-        TimeUnit.SECONDS.sleep(4);
         LOGGER.debug("Clicked on PassTest button, Navigated to main page");
         return this;
     }
 }
-
-
-
-
-
 
 
 //---------------------------------------------------------------------------------------

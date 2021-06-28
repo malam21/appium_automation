@@ -35,7 +35,7 @@ public class NavigationPageClockSetup {
 
     //Navigate to Keypad test page
     public ClockSetupSetupPage navigateToSetupPage() {
-        ActOn.wait(driver, SETUP_BUTTON).waitForToBeVisible(4);
+        ActOn.wait(driver, SETUP_BUTTON).waitForToBeVisible(7);
         ActOn.element(driver, SETUP_BUTTON).click();
         LOGGER.info("User navigated to setup test page.");
         return new ClockSetupSetupPage(driver);
@@ -57,7 +57,7 @@ public class NavigationPageClockSetup {
 
     //Navigate to connectivity Ethernet page
     public CSetupConnectivityEthernetPage navigateToConnectivityPage() {
-        ActOn.wait(driver, CONNECTIVITY).waitForToBeVisible(4);
+        ActOn.wait(driver, CONNECTIVITY).waitForToBeVisible(6);
         ActOn.element(driver, CONNECTIVITY).click();
         LOGGER.info("User navigated to connectivity page.");
         return new CSetupConnectivityEthernetPage(driver);

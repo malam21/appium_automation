@@ -88,10 +88,10 @@ public class PullSetupParametersPage extends NavigationPage {
     }
 
     public PullSetupParametersPage clickToBackButton() throws InterruptedException {
+        //ActOn.wait(driver, BACK_BUTTON).waitForToBeVisible(5);
         ActOn.element(driver, BACK_BUTTON).click();
         LOGGER.debug("Clicked on Back Button");
         TimeUnit.SECONDS.sleep(5);
-
         return this;
     }
 

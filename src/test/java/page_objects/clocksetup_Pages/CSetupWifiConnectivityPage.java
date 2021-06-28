@@ -95,15 +95,17 @@ public class CSetupWifiConnectivityPage extends NavigationPageClockSetup {
         ActOn.wait(driver, DONE_BUTTON).waitForToBeVisible(4);
         ActOn.element(driver, DONE_BUTTON).click();
         LOGGER.debug("Clicked to Done Button");
-        TimeUnit.SECONDS.sleep(4);
+        TimeUnit.SECONDS.sleep(3);
         return this;
     }
 
-    public CSetupWifiConnectivityPage clickToOK() throws InterruptedException {
-        ActOn.wait(driver, OK_BUTTON).waitForToBeVisible(10);
-        ActOn.element(driver, OK_BUTTON).click();
-        LOGGER.debug("Clicked to OK Button");
-        TimeUnit.SECONDS.sleep(3);
+    public CSetupWifiConnectivityPage clickToOK() {
+        if (driver.findElement(By.id("android:id/button1")).isDisplayed()){
+            ActOn.element(driver, OK_BUTTON).click();
+            LOGGER.info("Ok button not displayed");
+        } else {
+            LOGGER.info("Clicked on Ok button");
+        }
         return this;
     }
 

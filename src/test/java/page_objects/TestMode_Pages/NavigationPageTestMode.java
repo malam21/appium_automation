@@ -32,7 +32,7 @@ public class NavigationPageTestMode {
     private final By PRESENCE_SENSOR_TEST = By.id("com.accutime.testmode:id/btn_presence_fragment");
     private final By ABOUT_CLOCK = By.id("com.accutime.testmode:id/btn_about_fragment");
     private final By CAMERA_TEST = By.id("com.accutime.testmode:id/btn_camera_test");
-
+    private final By DIDO = By.id("com.accutime.testmode:id/btn_dido_fragment");
 
     //*
     //private final By POWER_TEST = By.id("com.accutime.testmode:id/btn_dido_fragment");
@@ -129,6 +129,14 @@ public class NavigationPageTestMode {
         LOGGER.debug("User navigating to Camera page");
         return new DiDoCameraTestPage(driver);
 
+    }
+
+    //Navigate to DiDo Test Page
+    public DiDoCameraTestPage navigateToDiDoPage() {
+        ActOn.element(driver, DIDO).click();
+        LOGGER.info("User navigated to DIDO page.");
+        LOGGER.debug("User navigating to DIDO page");
+        return new DiDoCameraTestPage(driver);
     }
 
 }

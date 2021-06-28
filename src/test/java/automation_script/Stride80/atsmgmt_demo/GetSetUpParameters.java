@@ -25,7 +25,6 @@ public class GetSetUpParameters extends ATSMgmt_BaseClass {
                 .ClickGetTerminalName()
                 .validateTerminalName(TerminalName)
                 .clickToBackButton();
-
     }
 }
 

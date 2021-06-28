@@ -44,10 +44,11 @@ public class ClockSetupManufacturing extends ClockSetup_BaseClass {
                 .enterServerPassword(servPass)
                 .clickToPullSetUpParameter()
                 .clickToOK()
-                .clickToDone()
                 .clickToDone();
+                //.clickToDone();
 
     }
+
 }
 
 

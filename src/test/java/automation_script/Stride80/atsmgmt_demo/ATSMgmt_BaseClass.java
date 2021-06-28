@@ -39,14 +39,14 @@ public class ATSMgmt_BaseClass {
             LOGGER.error("Message is : " + exp.getMessage());
             exp.printStackTrace();
         }
-
     }
 
     @AfterMethod
     public void closeBrowser() {
-        // driver.manage().deleteAllCookies();
+
         //ActOn.browser(driver).closeBrowser();
         driver.quit();
+        //driver.closeApp();
         LOGGER.info(endTestCase);
     }
 }

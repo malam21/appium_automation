@@ -47,6 +47,7 @@ public class ClockSetupWifiConnectivity extends ClockSetup_BaseClass {
                 .clickToDone()
                 .clickToDone()
                 .clickToOK();
+
     }
 }
 

@@ -71,7 +71,8 @@ public class ClockSetupTerminal extends ClockSetup_BaseClass {
                 .clickToDone()
                 .clickToDone()
                 .clickToDone()
-                .clickToOKButton();
+                .clickToOkButton();
 
     }
+
 }
